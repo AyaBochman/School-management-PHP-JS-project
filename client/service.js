@@ -1,6 +1,33 @@
 checkLogin();
 getData();
 
+
+function getAdmins() {
+    DOM.leftHead.innerHTML = "Admins";
+    DOM.rightHead.innerHTML = "";
+    DOM.rowContent.innerHTML = "";
+    $.ajax({
+        url: "http://localhost/school/api/index.php?controller=admin&action=get_admins",
+        method: "GET",
+        success: function (res) {
+            console.log(JSON.parse(res));
+            DOM.leftHead.innerHTML = "Admins <button class='btn btn-primary'><i class='fa fa-plus-circle'></i></button>";
+
+            DOM.students.innerHTML = "";
+            DOM.courses.innerHTML = "";
+
+            drawAdmins(JSON.parse(res));
+
+        },
+        error: function (res) {
+            console.log(JSON.stringify(res));
+        }
+
+    })
+
+}
+
+
 function displaySelected() {
     DOM.overview.innerHTML = "";
     var id = this.id;
@@ -160,7 +187,7 @@ function saveCourse() {
             data: { courseName: courseName, desc: desc },
             success: function (res) {
                 clean();
-                getCurrent(JSON.parse(res),"courses");
+                getCurrent(JSON.parse(res), "courses");
                 getData();
             },
             error: function (res) {
@@ -207,7 +234,7 @@ function saveStudent() {
             data: { name: name, phone: phone, email: email },
             success: function (res) {
                 clean();
-                getCurrent(JSON.parse(res),"students");
+                getCurrent(JSON.parse(res), "students");
                 getData();
             },
             error: function (res) {

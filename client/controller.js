@@ -3,9 +3,11 @@ var DOM = function () {
         main: document.getElementById("main"),
         courses: document.getElementById("courseList"),
         students: document.getElementById("studentList"),
+        admins: document.getElementById("adminList"),
         overview: document.getElementById("overview"),
         leftHead: document.getElementById("leftHead"),
         rightHead: document.getElementById("rightHead"),
+        rowContent: document.getElementById("rowContent"),
         overviewHead: document.getElementById("overview-h4")
 
     }
@@ -68,6 +70,18 @@ if(array !== ""){
 }
 
 
+function drawAdmins(array){
+    console.log("draw "+array);
+    // array.forEach(element => {
+    //     console.log(element);
+    //        DOM.admins.appendChild(adminLi(element));
+    // });
+    // for (let index = 0; index < array.length; index++) {
+    //     console.log(array[i]);
+    //     // DOM.admins.appendChild(adminLi(array[i]));
+    // }
+}
+
 // function drawCourse(course) {
 //     DOM.courses.innerHTML = "";
 //     for (let index = 0; index < course.length; index++) {
@@ -75,6 +89,19 @@ if(array !== ""){
 //     }
 
 // }
+
+function adminLi(singleAdmin) {
+    var li = document.createElement("li");
+    var text = document.createElement("p");
+    text.classList.add("li-text");
+    li.classList.add("list-group-item");
+    text.innerText = singleAdmin.name;
+    li.id = singleAdmin.id;
+    li.setAttribute("table", "admins");
+    li.appendChild(text);
+    // li.addEventListener("click", displaySelected);
+    return li;
+}
 
 function courseLi(singleCourse) {
     var li = document.createElement("li");
