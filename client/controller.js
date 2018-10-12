@@ -35,27 +35,14 @@ var cFORM = function () {
 }();
 
 
-
-//LOAD STUDENT FORM
-function loadForm() {
-    $("#overview").load("studentForm.html");
-  
-}
-
-//LOAD COURSE FORM
-function CourseForm() {
-    $("#overview").load("courseForm.html");
-
+function loadForm(param){
+    $("#overview").load(param+"Form.html");
 }
 
 //the status of the form edit/add
 var status;
 
 //COURSES MAIN VIEW
-
-// $("#leftHead").text("<button class='btn btn-primary' id='addStudentBtn' onclick='addStudentForm()'><i
-//                             class='fa fa-plus-circle'></i></button>");
-
 
 
 function draw(array){
@@ -133,68 +120,85 @@ function addStudentForm() {
 
 
 //EDIT STUDENT FORM
-function editStudent() {
-    status = "edit";
-    console.log("edit mode");
-    loadForm();
-    chooseCourses();
-    var student = this.parentElement;
-    var id = student.id;
-    $.ajax({
-        url: "http://localhost/school/api/index.php?controller=home&action=get_current_student",
-        method: "GET",
-        data: { id: id },
-        success: function (res) {
-            fillFormStudent(JSON.parse(res));
-        },
-        error: function (res) {
-            alert(JSON.stringify(res));
-        }
+// function editStudent() {
+//     status = "edit";
+//     console.log("edit mode");
+//     loadForm();
+//     chooseCourses();
+//     var student = this.parentElement;
+//     var id = student.id;
+//     $.ajax({
+//         url: "http://localhost/school/api/index.php?controller=home&action=get_current_student",
+//         method: "GET",
+//         data: { id: id },
+//         success: function (res) {
+//             fillFormStudent(JSON.parse(res));
+//         },
+//         error: function (res) {
+//             alert(JSON.stringify(res));
+//         }
 
-    })
+//     })
 
+// }
+
+function fillForm(result,param){
+switch (param) {
+    case "student":
+    sFORM.id.value = result[0].id;
+    sFORM.name.value = result[0].name;
+    sFORM.phone.value = result[0].phone;
+    sFORM.email.value = result[0].email;
+        break;
+
+    case "course":
+    cFORM.id.value = result[0].id;
+    cFORM.courseName.value = result[0].name;
+    cFORM.desc.value = result[0].description;
+        break;
+}
 }
 
 //FILL FORM WITH THE STUDENT VALUES FOR EDIT
-function fillFormStudent(student) {
-    sFORM.id.value = student[0].id;
-    sFORM.name.value = student[0].name;
-    sFORM.phone.value = student[0].phone;
-    sFORM.email.value = student[0].email;
-    // sFORM.image.value = student[0].image;
-}
+// function fillFormStudent(student) {
+//     sFORM.id.value = student[0].id;
+//     sFORM.name.value = student[0].name;
+//     sFORM.phone.value = student[0].phone;
+//     sFORM.email.value = student[0].email;
+//     // sFORM.image.value = student[0].image;
+// }
 
-//FILL FORM WITH THE COURSE VALUES FOR EDIT
-function fillFormCourse(course) {
-    cFORM.id.value = course[0].id;
-    cFORM.courseName.value = course[0].name;
-    cFORM.desc.value = course[0].description;
-}
+// //FILL FORM WITH THE COURSE VALUES FOR EDIT
+// function fillFormCourse(course) {
+//     cFORM.id.value = course[0].id;
+//     cFORM.courseName.value = course[0].name;
+//     cFORM.desc.value = course[0].description;
+// }
 
 
 // //EDIT COURSE FORM
-function editCourse() {
-    status = "edit";
-    console.log("edit mode");
-    CourseForm();
-    var course = this.parentElement;
-    console.log(course)
-    var id = course.id;
-    $.ajax({
-        url: "http://localhost/school/api/index.php?controller=home&action=get_current_course",
-        method: "GET",
-        data: { id: id },
-        success: function (res) {
-            console.log(JSON.parse(res));
-            fillFormCourse(JSON.parse(res));
-        },
-        error: function (res) {
-            alert(JSON.stringify(res));
-        }
+// function editCourse() {
+//     status = "edit";
+//     console.log("edit mode");
+//     CourseForm();
+//     var course = this.parentElement;
+//     console.log(course)
+//     var id = course.id;
+//     $.ajax({
+//         url: "http://localhost/school/api/index.php?controller=home&action=get_current_course",
+//         method: "GET",
+//         data: { id: id },
+//         success: function (res) {
+//             console.log(JSON.parse(res));
+//             fillFormCourse(JSON.parse(res));
+//         },
+//         error: function (res) {
+//             alert(JSON.stringify(res));
+//         }
 
-    })
+//     })
 
-}
+// }
 
 
 function drawSelected(p,table){
@@ -207,12 +211,7 @@ function drawSelected(p,table){
     delBtn.classList.add("btn-danger");
     delBtn.innerText = "Delete";
     delBtn.addEventListener('click',delCurrent);
-    //update
-    var editBtn = document.createElement("button");
-    editBtn.classList.add("btn");
-    editBtn.classList.add("btn-success");
-    editBtn.innerText = "Edit";
-    // delBtn.addEventListener('click',editCurrent);
+  
     switch (table) {
         case "students":
             //  console.log(p[0]);
@@ -222,6 +221,12 @@ function drawSelected(p,table){
         card.querySelector("#theName").innerHTML = p[0].name;
         card.querySelector("#thePhone").innerHTML = p[0].phone;
         card.querySelector("#theEmail").innerHTML = p[0].email;
+          //update
+    var editBtn = document.createElement("button");
+    editBtn.classList.add("btn");
+    editBtn.classList.add("btn-success");
+    editBtn.innerText = "Edit";
+    editBtn.addEventListener('click',editStudent);
         
             break;
     
@@ -231,6 +236,12 @@ function drawSelected(p,table){
         card.querySelector("#img").src = p[0].image;
         card.querySelector("#theName").innerHTML = p[0].name;
         card.querySelector("#thedesc").innerHTML = p[0].description;
+          //update
+    var editBtn = document.createElement("button");
+    editBtn.classList.add("btn");
+    editBtn.classList.add("btn-success");
+    editBtn.innerText = "Edit";
+    editBtn.addEventListener('click',editCourse);
         break;
     }
     card.appendChild(delBtn);
@@ -278,32 +289,32 @@ function displayName(array){
 
 
 
-function chooseCourses() {
-    $.ajax({
-        url: "http://localhost/school/api/index.php?controller=home&action=get_courses",
-        method: "GET",
-        success: function (res) {
-            formCourse(JSON.parse(res));
+// function chooseCourses() {
+//     $.ajax({
+//         url: "http://localhost/school/api/index.php?controller=home&action=get_courses",
+//         method: "GET",
+//         success: function (res) {
+//             formCourse(JSON.parse(res));
 
-        },
-        error: function (res) {
-            alert(JSON.stringify(res));
-        }
+//         },
+//         error: function (res) {
+//             alert(JSON.stringify(res));
+//         }
 
-    })
+//     })
 
-}
+// }
 
 
 
 //COURSE DISPLAY FOR STUDENTS FORM
-function formCourse(course) {
-    // sFORM.courseChoose.innerHTML = "";
-    for (i = 0; i < course.length; i++) {
-        sFORM.courseChoose.appendChild(courseName(course[i]));
-    }
+// function formCourse(course) {
+//     // sFORM.courseChoose.innerHTML = "";
+//     for (i = 0; i < course.length; i++) {
+//         sFORM.courseChoose.appendChild(courseName(course[i]));
+//     }
 
-}
+// }
 
 function courseName(singleCourse) {
     var li = document.createElement("li");

@@ -46,12 +46,12 @@ if (file_exists($path_filename_ext)) {
      }
               
         
-            public function del_student(){
+        //     public function del_student(){
  
-                echo json_encode($this->model->deleteStudent($_POST['id']));
-                $this->model->deleteEnrolled($_POST['id']);
+        //         echo json_encode($this->model->deleteStudent($_POST['id']));
+        //         $this->model->deleteEnrolled($_POST['id']);
             
-        }
+        // }
 }
 
 

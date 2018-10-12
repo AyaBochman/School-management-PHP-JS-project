@@ -100,3 +100,7 @@ display: inline-block;
 text-align: center;
 }
 
+#logged-user{
+    position: absolute;
+    right:5%;
+}

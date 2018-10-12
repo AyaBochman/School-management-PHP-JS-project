@@ -62,7 +62,8 @@ function checkLogin(){
           
         console.log("checkLogin");
         console.log("you are logged in as " + response);
-        $("#hello-user").html("<h5>Hello,"+response+"</h5>");
+        
+        $("#hello-user").html("<h5>Hello "+JSON.parse(response)+"</h5>");
        }
           
     //    console.log(response);
@@ -100,6 +101,11 @@ function logInNow() {
     })
 
 }
+
+
+$("#logout").click(function(){
+    console.log("bye");
+})
    
 
    // function init() {

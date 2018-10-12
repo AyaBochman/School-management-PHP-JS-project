@@ -24,9 +24,11 @@ class LoginController{
           
         }
         else{
-            // echo json_encode("ok");
-            echo $_SESSION['currentUser']->name;
-        //    echo "ok";
+            $theuser = array();
+            $_SESSION['role'] = $_SESSION['currentUser']->role_name;
+            array_push($theuser,$_SESSION['currentUser']->name,$_SESSION['role']);
+            echo json_encode($theuser);
+       
     
         }
         

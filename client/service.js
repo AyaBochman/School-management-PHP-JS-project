@@ -6,6 +6,7 @@
 
 checkLogin();
 getData();
+
 function getData() {
 
     $.ajax({
@@ -146,6 +147,50 @@ function delCurrent(id, table) {
 
 }
 
+
+function editStudent() {
+    var that = this.parentElement;
+    var id = that.id;
+    // var table = that.getAttribute("table");
+    console.log(id);
+    console.log("edit student");
+    loadForm("student");
+    $.ajax({
+        url: "http://localhost/school/api/index.php?controller=home&action=get_current&table=students&id="+id,
+        method: "GET",
+        data: { id: id },
+        success: function (res) {
+            console.log(JSON.parse(res));
+            fillForm(JSON.parse(res),"student");
+        },
+        error: function (res) {
+            alert(JSON.stringify(res));
+        }
+
+    })
+}
+
+function editCourse() {
+    var that = this.parentElement;
+    var id = that.id;
+    // var table = that.getAttribute("table");
+    console.log(id);
+    console.log("edit course");
+    loadForm("course");
+    $.ajax({
+        url: "http://localhost/school/api/index.php?controller=home&action=get_current&table=courses&id="+id,
+        method: "GET",
+        data: { id: id },
+        success: function (res) {
+            console.log(JSON.parse(res));
+            fillForm(JSON.parse(res),"course");
+        },
+        error: function (res) {
+            alert(JSON.stringify(res));
+        }
+
+    })
+}
 //ADD//UPDATE STUDENT TO DB
 // $(document).ready(function(e){
 //     $("#studentForm").on('submit', function(e){
