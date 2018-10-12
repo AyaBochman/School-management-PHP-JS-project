@@ -91,7 +91,7 @@ function logInNow() {
             console.log(response);
             localStorage.setItem("currentUser", JSON.stringify(email));
             window.location.href = response;
-            
+            getData();
 
         },
         error: function (response) {

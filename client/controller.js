@@ -9,6 +9,11 @@ var DOM = function () {
     }
 }();
 
+function clean(){
+    DOM.overview.innerHTML = "";
+    DOM.overviewHead.innerHTML = "";
+}
+
 //STUDENT FORM
 var sFORM = function () {
     return {
@@ -35,8 +40,8 @@ var cFORM = function () {
 }();
 
 
-function loadForm(param){
-    $("#overview").load(param+"Form.html");
+function loadForm(param) {
+    $("#overview").load(param + "Form.html");
 }
 
 //the status of the form edit/add
@@ -45,17 +50,19 @@ var status;
 //COURSES MAIN VIEW
 
 
-function draw(array){
- 
-    for(i=0;i<array[0].length;i++){
- 
+function draw(array) {
+if(array !== ""){
+    for (i = 0; i < array[0].length; i++) {
+
         DOM.courses.appendChild(courseLi(array[0][i]));
     }
-    for(i=0;i<array[1].length;i++){
-     
+    for (i = 0; i < array[1].length; i++) {
+
         DOM.students.appendChild(studentLi(array[1][i]));
     }
 
+}
+    
 }
 
 
@@ -97,7 +104,7 @@ function studentLi(singleStudent) {
     li.classList.add("list-group-item");
     text.innerHTML = singleStudent.name + "<br>" + singleStudent.phone + "<br>";
     li.id = singleStudent.id;
-    li.setAttribute("table","students");
+    li.setAttribute("table", "students");
     li.appendChild(img);
     li.appendChild(text);
     li.addEventListener("click", displaySelected);
@@ -113,95 +120,38 @@ function addStudentForm() {
     status = "add";
     console.log("add mode");
     DOM.overviewHead.innerText = "Add a new Student";
-    loadForm();
-    chooseCourses();
+    loadForm("students");
+    // chooseCourses();
+}
 
+//ADD COURSE FORM
+function addCourseForm() {
+    status = "add";
+    DOM.overviewHead.innerText = "Add a new Course";
+    console.log("add mode");
+    loadForm("courses");
 }
 
 
-//EDIT STUDENT FORM
-// function editStudent() {
-//     status = "edit";
-//     console.log("edit mode");
-//     loadForm();
-//     chooseCourses();
-//     var student = this.parentElement;
-//     var id = student.id;
-//     $.ajax({
-//         url: "http://localhost/school/api/index.php?controller=home&action=get_current_student",
-//         method: "GET",
-//         data: { id: id },
-//         success: function (res) {
-//             fillFormStudent(JSON.parse(res));
-//         },
-//         error: function (res) {
-//             alert(JSON.stringify(res));
-//         }
+function fillForm(result, param) {
+    switch (param) {
+        case "students":
+            sFORM.id.value = result[0].id;
+            sFORM.name.value = result[0].name;
+            sFORM.phone.value = result[0].phone;
+            sFORM.email.value = result[0].email;
+            break;
 
-//     })
-
-// }
-
-function fillForm(result,param){
-switch (param) {
-    case "student":
-    sFORM.id.value = result[0].id;
-    sFORM.name.value = result[0].name;
-    sFORM.phone.value = result[0].phone;
-    sFORM.email.value = result[0].email;
-        break;
-
-    case "course":
-    cFORM.id.value = result[0].id;
-    cFORM.courseName.value = result[0].name;
-    cFORM.desc.value = result[0].description;
-        break;
-}
+        case "courses":
+            cFORM.id.value = result[0].id;
+            cFORM.courseName.value = result[0].name;
+            cFORM.desc.value = result[0].description;
+            break;
+    }
 }
 
-//FILL FORM WITH THE STUDENT VALUES FOR EDIT
-// function fillFormStudent(student) {
-//     sFORM.id.value = student[0].id;
-//     sFORM.name.value = student[0].name;
-//     sFORM.phone.value = student[0].phone;
-//     sFORM.email.value = student[0].email;
-//     // sFORM.image.value = student[0].image;
-// }
 
-// //FILL FORM WITH THE COURSE VALUES FOR EDIT
-// function fillFormCourse(course) {
-//     cFORM.id.value = course[0].id;
-//     cFORM.courseName.value = course[0].name;
-//     cFORM.desc.value = course[0].description;
-// }
-
-
-// //EDIT COURSE FORM
-// function editCourse() {
-//     status = "edit";
-//     console.log("edit mode");
-//     CourseForm();
-//     var course = this.parentElement;
-//     console.log(course)
-//     var id = course.id;
-//     $.ajax({
-//         url: "http://localhost/school/api/index.php?controller=home&action=get_current_course",
-//         method: "GET",
-//         data: { id: id },
-//         success: function (res) {
-//             console.log(JSON.parse(res));
-//             fillFormCourse(JSON.parse(res));
-//         },
-//         error: function (res) {
-//             alert(JSON.stringify(res));
-//         }
-
-//     })
-
-// }
-
-
-function drawSelected(p,table){
+function drawSelected(p, table) {
     DOM.overviewHead.innerText = p[0].name;
     var card = document.getElementsByName("template")[0].cloneNode(true);
     card.style.display = "inline-block";
@@ -210,62 +160,57 @@ function drawSelected(p,table){
     delBtn.classList.add("btn");
     delBtn.classList.add("btn-danger");
     delBtn.innerText = "Delete";
-    delBtn.addEventListener('click',delCurrent);
-  
+    delBtn.addEventListener('click', delCurrent);
+
+    //edit
+    var editBtn = document.createElement("button");
+    editBtn.classList.add("btn");
+    editBtn.classList.add("btn-success");
+    editBtn.innerText = "Edit";
+    editBtn.addEventListener('click', editCurrent);
+
     switch (table) {
         case "students":
             //  console.log(p[0]);
-        card.id = p[0].id;
-        card.setAttribute("table", "students");
-        card.querySelector("#img").src = p[0].image;
-        card.querySelector("#theName").innerHTML = p[0].name;
-        card.querySelector("#thePhone").innerHTML = p[0].phone;
-        card.querySelector("#theEmail").innerHTML = p[0].email;
-          //update
-    var editBtn = document.createElement("button");
-    editBtn.classList.add("btn");
-    editBtn.classList.add("btn-success");
-    editBtn.innerText = "Edit";
-    editBtn.addEventListener('click',editStudent);
-        
+            card.id = p[0].id;
+            card.setAttribute("table", "students");
+            card.querySelector("#img").src = p[0].image;
+            card.querySelector("#theName").innerHTML = p[0].name;
+            card.querySelector("#thePhone").innerHTML = p[0].phone;
+            card.querySelector("#theEmail").innerHTML = p[0].email;
+
             break;
-    
+
         case "courses":
-        card.id = p[0].id;
-        card.setAttribute("table", "courses");
-        card.querySelector("#img").src = p[0].image;
-        card.querySelector("#theName").innerHTML = p[0].name;
-        card.querySelector("#thedesc").innerHTML = p[0].description;
-          //update
-    var editBtn = document.createElement("button");
-    editBtn.classList.add("btn");
-    editBtn.classList.add("btn-success");
-    editBtn.innerText = "Edit";
-    editBtn.addEventListener('click',editCourse);
-        break;
+            card.id = p[0].id;
+            card.setAttribute("table", "courses");
+            card.querySelector("#img").src = p[0].image;
+            card.querySelector("#theName").innerHTML = p[0].name;
+            card.querySelector("#thedesc").innerHTML = p[0].description;
+            break;
     }
     card.appendChild(delBtn);
     card.appendChild(editBtn);
     DOM.overview.appendChild(card);
-    
+
 }
 
 //SHOW STUDENTS/COURSES ENROLLED TO COURSE
 
-function enrolledNum(number,param){
+function enrolledNum(number, param) {
     // console.log("the number" + number[0].total)
     var p = document.createElement("h5");
     p.classList.add("enrolled");
     switch (param) {
         case "students":
-        p.innerText = "Courses Enrolled: " + number[0].total;
-        
+            p.innerText = "Courses Enrolled: " + number[0].total;
+
             break;
         case "courses":
-        p.innerText = "Students Enrolled: " + number[0].total;
-       
-        break;
-      
+            p.innerText = "Students Enrolled: " + number[0].total;
+
+            break;
+
     }
     DOM.overview.appendChild(p);
 }
@@ -273,17 +218,17 @@ function enrolledNum(number,param){
 
 //SHOW THE ENROLLED STUDENT/COURSES NAMES
 
-function displayName(array){
+function displayName(array) {
     // console.log(array);
     if (array != "") {
         for (i = 0; i < array.length; i++) {
             var dname = document.createElement("p");
             dname.innerText = array[i].name;
             DOM.overview.appendChild(dname);
-            
+
 
         }
-    } 
+    }
 }
 
 
@@ -329,13 +274,7 @@ function courseName(singleCourse) {
 }
 
 
-//ADD COURSE FORM
-function addCourseForm() {
-    status = "add";
-    DOM.overviewHead.innerText = "Add a new Course";
-    console.log("add mode");
-    CourseForm();
-}
+
 
 //IMAGE DISPLAY IN FORM
 function readURL(input) {

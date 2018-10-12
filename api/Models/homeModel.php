@@ -15,22 +15,11 @@ public function getData($table){
 }
 
   public function getCurrent($table,$id){
-    // // $result = array();
-    // $enrolled = array();
+   
 
     $data =   $this->dbc->Select("SELECT * FROM ".$table." where id=".$id);
 
-    // if($table == "students"){
-    //   $data2 = $this->dbc->Select("SELECT name FROM courses 
-    //   join student_course on student_course.courseId = courses.id where student_course.studentId = ".$id );
-    // }
-    // if($table == "courses"){
-    //   $data2 = $this->dbc->Select("SELECT students.name FROM student_course 
-    //   join students on studentId = students.id where courseId = ".$id);
-    // }
-
-    // array_push($enrolled,$data2);
-    // array_push($data,$data2);
+   
    
     return $data;
   }
