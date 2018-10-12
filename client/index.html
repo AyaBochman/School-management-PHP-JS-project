@@ -42,25 +42,19 @@
         </li>
     </ul>
 
-    <br>
-    <div id="main" class="container-fluid">
-        <div class="row">
+    
+    <!-- ROW HEADERS  -->
+        <div id="rowHeaders" class="row">
             <div class="col-sm-3">
                 <h4 class="center-head" id="leftHead"><button class='btn btn-primary' id="addCourseBtn" onclick="addCourseForm()"><i
                             class="fa fa-plus-circle"></i></button></h4>
-                <ul class="list-group" id="courseList">
-
-                </ul>
 
             </div>
 
             <div class="col-sm-3">
                 <h4 class="center-head" id="rightHead"><button class='btn btn-primary' id="addStudentBtn" onclick="addStudentForm()"><i
                             class="fa fa-plus-circle"></i></button></h4>
-                <ul class="list-group" id="studentList">
-
-
-                </ul>
+               
 
             </div>
             <!-- <div class="col-sm-6">
@@ -72,15 +66,52 @@
             </div> -->
             <div class="col-sm-6">
                 <h4 class="center-head" id="overview-h4">Overview</h4>
-                <ul class="list-group" id="overview">
-
-                </ul>
+               
 
             </div>
 
 
         </div>
 
+        <!-- END ROW HEADERS -->
+
+        <!-- ROW CONTENT -->
+        
+        <div id="rowContent" class="row">
+                <div class="col-sm-3">
+                  
+                    <ul class="list-group" id="courseList">
+    
+                    </ul>
+    
+                </div>
+    
+                <div class="col-sm-3">
+                   
+                    <ul class="list-group" id="studentList">
+    
+    
+                    </ul>
+    
+                </div>
+                <!-- <div class="col-sm-6">
+                    <h4 id="admin-head" class="center-head"></h4>
+                    <ul class="list-group" id="adminList">
+    
+    
+                        </ul>
+                </div> -->
+                <div class="col-sm-6">
+               
+                    <ul class="list-group" id="overview">
+    
+                    </ul>
+    
+                </div>
+    
+    
+                </div>
+                
 
 
         <br>

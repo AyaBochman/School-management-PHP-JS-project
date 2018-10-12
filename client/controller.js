@@ -4,6 +4,8 @@ var DOM = function () {
         courses: document.getElementById("courseList"),
         students: document.getElementById("studentList"),
         overview: document.getElementById("overview"),
+        leftHead: document.getElementById("leftHead"),
+        rightHead: document.getElementById("rightHead"),
         overviewHead: document.getElementById("overview-h4")
 
     }

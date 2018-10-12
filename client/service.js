@@ -1,30 +1,5 @@
-// function init() {
-//     getData();
-// }
-// init();
-// checkLogin();
-
 checkLogin();
 getData();
-
-function getData() {
-
-    $.ajax({
-        url: "http://localhost/school/api/index.php?controller=home&action=get_data",
-        method: "GET",
-        success: function (res) {
-            DOM.students.innerHTML = "";
-            DOM.courses.innerHTML = "";
-            draw(JSON.parse(res));
-
-        },
-        error: function (res) {
-            console.log(JSON.stringify(res));
-        }
-
-    })
-}
-
 
 function displaySelected() {
     DOM.overview.innerHTML = "";

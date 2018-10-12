@@ -1,53 +1,10 @@
+// $( window ).on( "load", init );
 
-//    function isLoggedIn(){
-    
-//         $.ajax({
-//             method: "GET",
-//             url: "http://localhost/school/api/index.php?controller=login&action=index",
-//             success: function (res) {
-//                 console.log("here");
-//                 if(res != ""){
-//                     getHome();
-//                 }
-                    
-               
-               
-//             },
-//             error: function (error) {
-//                 console.log("error");
-//                 window.location.href = "http://localhost/school/client/login.html"
-               
-                
-//             }
-//         })
-    
+// function init(){
+//     console.log("the page loads");
+
+   
 // }
-// $("#loginBtn").click(function(){
-//     console.log("Hey");
-//     var email = document.getElementById("email").value;
-//     var password = document.getElementById("password").value;
-//     $.ajax({
-//         method: "POST",
-//         url: "http://localhost/school/api/index.php?controller=login&action=login",
-//         data: { email: email, password: password },
-//         success: function (response) {
-//             console.log(response);
-//             localStorage.setItem("currentUser", JSON.stringify(email));
-            
-//             window.location.href = response;
-           
-//             console.log("done");
-            
-
-//         },
-//         error: function (response) {
-//             alert("oops");
-//         }
-
-//     })
-// })
-// getData();
-
 
 function checkLogin(){
     $.ajax({
@@ -64,12 +21,8 @@ function checkLogin(){
         console.log("you are logged in as " + response);
         
         $("#hello-user").html("<h5>Hello "+JSON.parse(response)+"</h5>");
+    
        }
-          
-    //    console.log(response);
-                
-        
-            // window.location.href = response;     
 
         },
         error: function (response) {
@@ -91,7 +44,7 @@ function logInNow() {
             console.log(response);
             localStorage.setItem("currentUser", JSON.stringify(email));
             window.location.href = response;
-            getData();
+           
 
         },
         error: function (response) {
@@ -101,6 +54,28 @@ function logInNow() {
     })
 
 }
+
+
+function getData() {
+
+    $.ajax({
+        url: "http://localhost/school/api/index.php?controller=home&action=get_data",
+        method: "GET",
+        success: function (res) {
+            DOM.leftHead.innerHTML = "Courses <button class='btn btn-primary' id='addCourseBtn' onclick='addCourseForm()'><i class='fa fa-plus-circle'></i></button>";
+            DOM.rightHead.innerHTML = "Students <button class='btn btn-primary' id='addStudentBtn' onclick='addStudentForm()'><i class='fa fa-plus-circle'></i></button>"
+            DOM.students.innerHTML = "";
+            DOM.courses.innerHTML = "";
+            draw(JSON.parse(res));
+
+        },
+        error: function (res) {
+            console.log(JSON.stringify(res));
+        }
+
+    })
+}
+
 
 
 $("#logout").click(function(){
