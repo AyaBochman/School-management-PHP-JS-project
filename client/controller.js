@@ -13,7 +13,7 @@ var DOM = function () {
     }
 }();
 
-function clean(){
+function clean() {
     DOM.overview.innerHTML = "";
     DOM.overviewHead.innerHTML = "";
 }
@@ -55,23 +55,29 @@ var status;
 
 
 function draw(array) {
-if(array !== ""){
-    for (i = 0; i < array[0].length; i++) {
+    if (array !== "") {
+        for (i = 0; i < array[0].length; i++) {
 
-        DOM.courses.appendChild(courseLi(array[0][i]));
-    }
-    for (i = 0; i < array[1].length; i++) {
+            DOM.courses.appendChild(courseLi(array[0][i]));
+        }
+        for (i = 0; i < array[1].length; i++) {
 
-        DOM.students.appendChild(studentLi(array[1][i]));
+            DOM.students.appendChild(studentLi(array[1][i]));
+        }
+
     }
 
 }
-    
-}
 
 
-function drawAdmins(array){
-    console.log("draw "+array);
+function drawAdmins(array) {
+    for (let index = 0; index < array.length; index++) {
+
+        console.log(array[index].name);
+        DOM.students.appendChild(adminLi(array[index]));
+
+    }
+
     // array.forEach(element => {
     //     console.log(element);
     //        DOM.admins.appendChild(adminLi(element));
@@ -95,11 +101,11 @@ function adminLi(singleAdmin) {
     var text = document.createElement("p");
     text.classList.add("li-text");
     li.classList.add("list-group-item");
-    text.innerText = singleAdmin.name;
+    text.innerHTML = singleAdmin.name + "<br>" + singleAdmin.phone + "<br>" + singleAdmin.email;
     li.id = singleAdmin.id;
     li.setAttribute("table", "admins");
     li.appendChild(text);
-    // li.addEventListener("click", displaySelected);
+    li.addEventListener("click", displaySelected);
     return li;
 }
 
@@ -216,6 +222,16 @@ function drawSelected(p, table) {
             card.querySelector("#img").src = p[0].image;
             card.querySelector("#theName").innerHTML = p[0].name;
             card.querySelector("#thedesc").innerHTML = p[0].description;
+            break;
+
+        case "admins":
+        card.querySelector("#img").remove();
+            card.id = p[0].id;
+            card.setAttribute("table", "admins");
+            card.querySelector("#theName").innerHTML = p[0].name;
+            card.querySelector("#thePhone").innerHTML = p[0].phone;
+            card.querySelector("#theEmail").innerHTML = p[0].email;
+           
             break;
     }
     card.appendChild(delBtn);

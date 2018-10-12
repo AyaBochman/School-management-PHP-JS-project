@@ -3,19 +3,20 @@ getData();
 
 
 function getAdmins() {
-    DOM.leftHead.innerHTML = "Admins";
+    DOM.leftHead.innerHTML = "";
     DOM.rightHead.innerHTML = "";
-    DOM.rowContent.innerHTML = "";
+    // DOM.rowContent.innerHTML = "";
     $.ajax({
         url: "http://localhost/school/api/index.php?controller=admin&action=get_admins",
         method: "GET",
         success: function (res) {
             console.log(JSON.parse(res));
-            DOM.leftHead.innerHTML = "Admins <button class='btn btn-primary'><i class='fa fa-plus-circle'></i></button>";
-
+            DOM.rightHead.innerHTML = "Admins <button class='btn btn-primary'><i class='fa fa-plus-circle'></i></button>";
+          
+            DOM.courses.remove();
+         
             DOM.students.innerHTML = "";
-            DOM.courses.innerHTML = "";
-
+            
             drawAdmins(JSON.parse(res));
 
         },
@@ -33,8 +34,8 @@ function displaySelected() {
     var id = this.id;
     var table = this.getAttribute("table");
 
-    // console.log(id);
-    // console.log(table);
+    console.log(id);
+    console.log(table);
     getCurrent(id, table);
     getEnrolled(id, table);
     getNames(id, table);
