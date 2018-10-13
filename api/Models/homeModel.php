@@ -86,13 +86,13 @@ public function getData($table){
   // }
 
   public function courseNames($id){
-    $data = $this->dbc->Select("SELECT name FROM courses 
+    $data = $this->dbc->Select("SELECT * FROM courses 
     join student_course on student_course.courseId = courses.id where student_course.studentId = ".$id );
     return $data;
   }
 
   public function studentNames($id){
-    $data = $this->dbc->Select("SELECT students.name FROM student_course 
+    $data = $this->dbc->Select("SELECT * FROM student_course 
     join students on studentId = students.id where courseId = ".$id);
     return $data;
   }

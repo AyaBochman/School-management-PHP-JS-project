@@ -306,9 +306,6 @@ function getAdmin(id) {
 function delAdmin() {
     var that = this.parentElement;
     var id = that.id;
-    // var table = that.getAttribute("table");
-    // console.log(id);
-    // console.log(table);
     console.log(id);
     $('#myModal').modal('show');
     $('.delete-confirm').click(function () {

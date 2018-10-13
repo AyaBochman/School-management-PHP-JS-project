@@ -20,7 +20,7 @@ function checkLogin(){
      
         console.log("checkLogin");
         console.log("you are logged in as " + response);
-        $("#hello-user").html("Welcome "+JSON.parse(response));
+        $("#hello-user").html("Welcome!"+"<br>"+JSON.parse(response));
         getData();
         userJob = JSON.parse(response)[1];
         if(userJob == "sales"){

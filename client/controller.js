@@ -207,8 +207,8 @@ function drawSelected(p, table) {
             card.setAttribute("table", "students");
             card.querySelector("#img").src = p[0].image;
             // card.querySelector("#theName").innerHTML = p[0].name;
-            card.querySelector("#thePhone").innerHTML = p[0].phone;
-            card.querySelector("#theEmail").innerHTML = p[0].email;
+            card.querySelector("#thePhone").innerHTML = "Phone: " + p[0].phone;
+            card.querySelector("#theEmail").innerHTML = "Email: " + p[0].email;
             card.appendChild(delBtn);
             card.appendChild(editBtn);
 
@@ -219,7 +219,7 @@ function drawSelected(p, table) {
             card.setAttribute("table", "courses");
             card.querySelector("#img").src = p[0].image;
             // card.querySelector("#theName").innerHTML = p[0].name;
-            card.querySelector("#thedesc").innerHTML = p[0].description;
+            card.querySelector("#thedesc").innerHTML = "Description"+"<br>"+p[0].description;
             if(userJob != "sales"){
                 card.appendChild(delBtn);
                 card.appendChild(editBtn);
@@ -296,13 +296,20 @@ function displayName(array) {
     
     if (array != "") {
         for (i = 0; i < array.length; i++) {
-            var dname = document.createElement("li");
-            dname.style.listStyle = "none";
+            var div = document.createElement("div");
+            var dimg = document.createElement("img");
+            dimg.classList.add("tiny-img");
+            var dname = document.createElement("p");
+            dimg.src = array[i].image;
             dname.innerText = array[i].name;
-            $("#enrolled").append(dname);
+            // dname.id = array[i].id;
+            div.appendChild(dimg);
+            div.appendChild(dname);
+            $("#enrolled").append(div);
 
 
         }
+       
     }
 }
 
