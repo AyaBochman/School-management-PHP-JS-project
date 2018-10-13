@@ -10,13 +10,13 @@ function getAdmins() {
         url: "http://localhost/school/api/index.php?controller=admin&action=get_admins",
         method: "GET",
         success: function (res) {
-            
+
             DOM.rightHead.innerHTML = "Admins <button class='btn btn-primary'><i class='fa fa-plus-circle'></i></button>";
-          
+
             DOM.courses.remove();
-         
+
             DOM.students.innerHTML = "";
-            
+
             drawAdmins(JSON.parse(res));
 
         },
@@ -35,12 +35,34 @@ function displaySelected() {
     var table = this.getAttribute("table");
 
     getCurrent(id, table);
-    if(table != "admins"){
-        getEnrolled(id, table);
-        getNames(id, table);
-    }
+    getEnrolled(id, table);
+    getNames(id, table);
+
 }
 
+function displayAdmin() {
+    DOM.overview.innerHTML = "";
+    var id = this.id;
+    getAdmin(id);
+}
+
+
+function getAdmin(id){
+    $.ajax({
+        url: "http://localhost/school/api/index.php?controller=admin&action=get_admin",
+        method: "GET",
+        data: { id: id },
+        success: function (res) {
+            console.log(JSON.parse(res));
+            // drawSelected(JSON.parse(res), table);
+
+        },
+        error: function (res) {
+            console.log(JSON.stringify(res));
+        }
+
+    })
+}
 
 
 function getCurrent(id, table) {

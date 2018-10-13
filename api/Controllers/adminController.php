@@ -17,6 +17,13 @@ class AdminController{
        echo json_encode($admins);
     }
 
+    public function get_admin(){
+       
+        $result = $this->model->getCurrAdmin($_GET['id']);
+
+       echo json_encode($result);
+    }
+
 
     // public function get_current(){
     //     echo json_encode($this->model->getCurrent($_GET["table"],$_GET["id"]));

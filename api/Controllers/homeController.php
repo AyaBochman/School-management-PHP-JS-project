@@ -26,6 +26,7 @@ class HomeController{
     }
 
     public function del_current(){
+       
         echo json_encode($this->model->delCurrent($_POST["table"],$_POST["id"]));
         $this->model->deleteEnrolled($_POST["table"],$_POST['id']);
     }

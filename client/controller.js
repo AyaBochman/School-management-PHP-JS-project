@@ -89,7 +89,7 @@ function adminLi(singleAdmin) {
     li.id = singleAdmin.id;
     li.setAttribute("table", "admins");
     li.appendChild(text);
-    li.addEventListener("click", displaySelected);
+    li.addEventListener("click", displayAdmin);
     return li;
 }
 

@@ -13,7 +13,16 @@ class AdminModel extends Model{
     
   
   }
+
+  public function getCurrAdmin($id){
+    $data = $this->dbc->Select("SELECT admins.id,name,phone,email,roles.role_name as role FROM admins 
+    inner join roles on admins.role = roles.id WHERE admins.id =".$id);
+
+return $data;
+  }
   
+
+
 
 //   public function getCurrent($table,$id){
    
