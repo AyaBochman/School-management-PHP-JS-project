@@ -5,7 +5,7 @@ checkLogin();
 function getAdmins() {
     DOM.leftHead.innerHTML = "";
     DOM.rightHead.innerHTML = "";
-    // DOM.rowContent.innerHTML = "";
+    DOM.overview.innerHTML = "";
     $.ajax({
         url: "http://localhost/school/api/index.php?controller=admin&action=get_admins",
         method: "GET",
@@ -34,12 +34,11 @@ function displaySelected() {
     var id = this.id;
     var table = this.getAttribute("table");
 
-    console.log(id);
-    console.log(table);
     getCurrent(id, table);
-    getEnrolled(id, table);
-    getNames(id, table);
-
+    if(table != "admins"){
+        getEnrolled(id, table);
+        getNames(id, table);
+    }
 }
 
 
