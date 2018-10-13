@@ -271,7 +271,7 @@ function drawAdmin(admin){
 //SHOW STUDENTS/COURSES ENROLLED TO COURSE
 
 function enrolledNum(number, param) {
- 
+
     var p = document.createElement("h5");
     p.classList.add("enrolled");
     switch (param) {
@@ -285,7 +285,7 @@ function enrolledNum(number, param) {
             break;
 
     }
-    DOM.overview.appendChild(p);
+    $("#enrolled").append(p);
 }
 
 
