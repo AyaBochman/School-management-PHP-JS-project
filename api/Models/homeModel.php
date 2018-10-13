@@ -16,27 +16,32 @@ public function getData($table){
 
   public function getCurrent($table,$id){
    
-
-    $data =   $this->dbc->Select("SELECT * FROM ".$table." where id=".$id);
-
-   
+if($table == "admins"){
+  $data = $this->dbc->Select("SELECT admins.id,name,phone,email,roles.role_name as role FROM admins join roles on admins.role = roles.id WHERE admins.id=".$id);
+} 
+else{
+  $data =   $this->dbc->Select("SELECT * FROM ".$table." where id=".$id);
+}
    
     return $data;
   }
 
   public function delCurrent($table,$id){
-      
-    $q = "DELETE FROM " .$table. " WHERE id =".$id;
+      if(isset($_SESSION['currentUser'])) {
+        $q = "DELETE FROM " .$table. " WHERE id =".$id;
         
         
-    $data = $this->dbc->Prepare($q);
-    $data->execute();
-    if($data->affected_rows > 0 ){
-        return true;
-    }
-    else{
-        return false;
-    }
+        $data = $this->dbc->Prepare($q);
+        $data->execute();
+        if($data->affected_rows > 0 ){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+      }
+
   }
 
   public function deleteEnrolled($table,$id){

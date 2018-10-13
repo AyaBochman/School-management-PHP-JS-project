@@ -1,6 +1,6 @@
 
 body{
-    background: url('img/bg.jpg');
+    background: url('../img/bg.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 50% 50%; 
@@ -34,6 +34,9 @@ form{
     text-align: center;
 }
 
+.nav-link{
+    color: white;
+}
 
 
 .li-image{
@@ -122,4 +125,13 @@ text-align: center;
 #logged-user{
     position: absolute;
     right:5%;
+}
+
+.links{
+    padding: 30px;
+}
+
+.errorr{
+    color: red;
+    text-align: center;
 }

@@ -5,6 +5,7 @@
 
    
 // }
+let userJob;
 
 function checkLogin(){
     $.ajax({
@@ -19,8 +20,12 @@ function checkLogin(){
         getData();
         console.log("checkLogin");
         console.log("you are logged in as " + response);
-        
         $("#hello-user").html("<h5>Hello "+JSON.parse(response)+"</h5>");
+        userJob = JSON.parse(response)[1];
+        if(userJob == "sales"){
+            $("#adminLink").remove();
+        }
+       
     
        }
 

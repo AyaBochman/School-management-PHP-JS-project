@@ -73,35 +73,19 @@ function draw(array) {
 function drawAdmins(array) {
     for (let index = 0; index < array.length; index++) {
 
-        console.log(array[index].name);
+
         DOM.students.appendChild(adminLi(array[index]));
 
     }
 
-    // array.forEach(element => {
-    //     console.log(element);
-    //        DOM.admins.appendChild(adminLi(element));
-    // });
-    // for (let index = 0; index < array.length; index++) {
-    //     console.log(array[i]);
-    //     // DOM.admins.appendChild(adminLi(array[i]));
-    // }
 }
-
-// function drawCourse(course) {
-//     DOM.courses.innerHTML = "";
-//     for (let index = 0; index < course.length; index++) {
-//         DOM.courses.appendChild(courseLi(course[index]));
-//     }
-
-// }
 
 function adminLi(singleAdmin) {
     var li = document.createElement("li");
     var text = document.createElement("p");
     text.classList.add("li-text");
     li.classList.add("list-group-item");
-    text.innerHTML = singleAdmin.name + "<br>" + singleAdmin.phone + "<br>" + singleAdmin.email;
+    text.innerHTML = singleAdmin.name + "," + singleAdmin.role + "<br>" + singleAdmin.phone + "<br>" + singleAdmin.email;
     li.id = singleAdmin.id;
     li.setAttribute("table", "admins");
     li.appendChild(text);
@@ -187,6 +171,7 @@ function fillForm(result, param) {
 
 
 function drawSelected(p, table) {
+
     DOM.overviewHead.innerText = p[0].name;
     var card = document.getElementsByName("template")[0].cloneNode(true);
     card.style.display = "inline-block";
@@ -213,6 +198,8 @@ function drawSelected(p, table) {
             card.querySelector("#theName").innerHTML = p[0].name;
             card.querySelector("#thePhone").innerHTML = p[0].phone;
             card.querySelector("#theEmail").innerHTML = p[0].email;
+            card.appendChild(delBtn);
+            card.appendChild(editBtn);
 
             break;
 
@@ -222,28 +209,48 @@ function drawSelected(p, table) {
             card.querySelector("#img").src = p[0].image;
             card.querySelector("#theName").innerHTML = p[0].name;
             card.querySelector("#thedesc").innerHTML = p[0].description;
+            if(userJob != "sales"){
+                card.appendChild(delBtn);
+                card.appendChild(editBtn);
+            }
+            
             break;
 
         case "admins":
-        card.querySelector("#img").remove();
+            card.querySelector("#img").remove();
             card.id = p[0].id;
             card.setAttribute("table", "admins");
-            card.querySelector("#theName").innerHTML = p[0].name;
+            card.querySelector("#theName").innerHTML = p[0].name + ", " + p[0].role;
             card.querySelector("#thePhone").innerHTML = p[0].phone;
             card.querySelector("#theEmail").innerHTML = p[0].email;
-           
+            if(p[0].role == "manager"){
+                card.appendChild(editBtn);
+            }else{
+                card.appendChild(delBtn);
+                card.appendChild(editBtn);
+            }
+                
+            
             break;
     }
-    card.appendChild(delBtn);
-    card.appendChild(editBtn);
-    DOM.overview.appendChild(card);
-
+if(userJob == "manager"){
+    if(p[0].role != "owner"){
+        DOM.overview.appendChild(card);
+    }else{
+        DOM.overviewHead.innerHTML = "";
+        DOM.overview.innerHTML = "Sorry, you are unauthorized to view this content.";
+    }
 }
+   
+}
+   
+
+
 
 //SHOW STUDENTS/COURSES ENROLLED TO COURSE
 
 function enrolledNum(number, param) {
-    // console.log("the number" + number[0].total)
+ 
     var p = document.createElement("h5");
     p.classList.add("enrolled");
     switch (param) {
@@ -264,7 +271,7 @@ function enrolledNum(number, param) {
 //SHOW THE ENROLLED STUDENT/COURSES NAMES
 
 function displayName(array) {
-    // console.log(array);
+    
     if (array != "") {
         for (i = 0; i < array.length; i++) {
             var dname = document.createElement("p");

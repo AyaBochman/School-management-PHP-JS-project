@@ -10,7 +10,7 @@ function getAdmins() {
         url: "http://localhost/school/api/index.php?controller=admin&action=get_admins",
         method: "GET",
         success: function (res) {
-            console.log(JSON.parse(res));
+            
             DOM.rightHead.innerHTML = "Admins <button class='btn btn-primary'><i class='fa fa-plus-circle'></i></button>";
           
             DOM.courses.remove();
