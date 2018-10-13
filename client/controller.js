@@ -45,7 +45,34 @@ var cFORM = function () {
 
 
 function loadForm(param) {
+    
     $("#overview").load(param + "Form.html");
+}
+
+
+//ADD STUDENT FORM
+function addStudentForm() {
+    status = "add";
+    console.log("add mode");
+    DOM.overviewHead.innerText = "Add a new Student";
+    loadForm("students");
+    // chooseCourses();
+}
+
+//ADD COURSE FORM
+function addCourseForm() {
+    status = "add";
+    DOM.overviewHead.innerText = "Add a new Course";
+    console.log("add mode");
+    loadForm("courses");
+}
+
+
+function addAdminForm(){
+    status = "add";
+    DOM.overviewHead.innerText = "Add a new Admin";
+    console.log("add mode");
+    loadForm("admins");
 }
 
 //the status of the form edit/add
@@ -134,23 +161,6 @@ function studentLi(singleStudent) {
 
 
 
-//ADD STUDENT FORM
-function addStudentForm() {
-    status = "add";
-    console.log("add mode");
-    DOM.overviewHead.innerText = "Add a new Student";
-    loadForm("students");
-    // chooseCourses();
-}
-
-//ADD COURSE FORM
-function addCourseForm() {
-    status = "add";
-    DOM.overviewHead.innerText = "Add a new Course";
-    console.log("add mode");
-    loadForm("courses");
-}
-
 
 function fillForm(result, param) {
     switch (param) {
@@ -216,36 +226,47 @@ function drawSelected(p, table) {
             
             break;
 
-        case "admins":
-            card.querySelector("#img").remove();
-            card.id = p[0].id;
-            card.setAttribute("table", "admins");
-            card.querySelector("#theName").innerHTML = p[0].name + ", " + p[0].role;
-            card.querySelector("#thePhone").innerHTML = p[0].phone;
-            card.querySelector("#theEmail").innerHTML = p[0].email;
-            if(p[0].role == "manager"){
-                card.appendChild(editBtn);
-            }else{
-                card.appendChild(delBtn);
-                card.appendChild(editBtn);
-            }
-                
-            
-            break;
+       
     }
-if(userJob == "manager"){
-    if(p[0].role != "owner"){
-        DOM.overview.appendChild(card);
-    }else{
-        DOM.overviewHead.innerHTML = "";
-        DOM.overview.innerHTML = "Sorry, you are unauthorized to view this content.";
-    }
-}
+
+    DOM.overview.appendChild(card);
+
    
 }
    
 
-
+function drawAdmin(admin){
+    DOM.overviewHead.innerText = admin[0].name;
+    var card = document.getElementsByName("template")[0].cloneNode(true);
+    card.querySelector("#img").remove();
+    card.style.display = "inline-block";
+       //delete
+       var delBtn = document.createElement("button");
+       delBtn.classList.add("btn");
+       delBtn.classList.add("btn-danger");
+       delBtn.innerText = "Delete";
+       delBtn.addEventListener('click', delAdmin);
+   
+       //edit
+       var editBtn = document.createElement("button");
+       editBtn.classList.add("btn");
+       editBtn.classList.add("btn-success");
+       editBtn.innerText = "Edit";
+    //    editBtn.addEventListener('click', editAdmin);
+    card.id = admin[0].id;
+    card.setAttribute("table", "admins");
+    card.querySelector("#theName").innerHTML = admin[0].name + ", " + admin[0].role;
+    card.querySelector("#thePhone").innerHTML = admin[0].phone;
+    card.querySelector("#theEmail").innerHTML = admin[0].email;
+   
+    
+   
+        card.appendChild(delBtn);
+        card.appendChild(editBtn);
+    
+    DOM.overview.appendChild(card);
+        
+}
 
 //SHOW STUDENTS/COURSES ENROLLED TO COURSE
 

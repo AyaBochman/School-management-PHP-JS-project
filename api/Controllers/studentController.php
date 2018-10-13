@@ -17,8 +17,6 @@ class StudentController{
        
              
       
-   
-       
         
    //UPDATE STUDENT
      public function update_student(){

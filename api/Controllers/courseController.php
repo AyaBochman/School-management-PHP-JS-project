@@ -24,12 +24,12 @@ class CourseController{
      }
     
  
-            public function del_course(){
+        //     public function del_course(){
  
-                echo json_encode($this->model->deleteCourse($_POST['id']));
+        //         echo json_encode($this->model->deleteCourse($_POST['id']));
             
           
-        }
+        // }
 }
         
     

@@ -20,6 +20,23 @@ class AdminModel extends Model{
 
 return $data;
   }
+
+  public function delAdmin($id){
+    if(isset($_SESSION['currentUser'])) {
+      $q = "DELETE FROM admins WHERE admins.id =".$id;
+      
+      
+      $data = $this->dbc->Prepare($q);
+      $data->execute();
+      if($data->affected_rows > 0 ){
+          return true;
+      }
+      else{
+          return false;
+      }
+
+    }
+  }
   
 
 

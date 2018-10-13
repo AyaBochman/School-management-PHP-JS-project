@@ -16,12 +16,9 @@ public function getData($table){
 
   public function getCurrent($table,$id){
    
-if($table == "admins"){
-  $data = $this->dbc->Select("SELECT admins.id,name,phone,email,roles.role_name as role FROM admins join roles on admins.role = roles.id WHERE admins.id=".$id);
-} 
-else{
+
   $data =   $this->dbc->Select("SELECT * FROM ".$table." where id=".$id);
-}
+
    
     return $data;
   }

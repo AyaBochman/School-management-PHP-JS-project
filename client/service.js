@@ -1,32 +1,11 @@
 checkLogin();
 
+// getData();
+// function init(){
+//     console.log("refresh");
+// }
 
 
-function getAdmins() {
-    DOM.leftHead.innerHTML = "";
-    DOM.rightHead.innerHTML = "";
-    DOM.overview.innerHTML = "";
-    $.ajax({
-        url: "http://localhost/school/api/index.php?controller=admin&action=get_admins",
-        method: "GET",
-        success: function (res) {
-
-            DOM.rightHead.innerHTML = "Admins <button class='btn btn-primary'><i class='fa fa-plus-circle'></i></button>";
-
-            DOM.courses.remove();
-
-            DOM.students.innerHTML = "";
-
-            drawAdmins(JSON.parse(res));
-
-        },
-        error: function (res) {
-            console.log(JSON.stringify(res));
-        }
-
-    })
-
-}
 
 
 function displaySelected() {
@@ -40,28 +19,8 @@ function displaySelected() {
 
 }
 
-function displayAdmin() {
-    DOM.overview.innerHTML = "";
-    var id = this.id;
-    getAdmin(id);
-}
-
-
-function getAdmin(id){
-    $.ajax({
-        url: "http://localhost/school/api/index.php?controller=admin&action=get_admin",
-        method: "GET",
-        data: { id: id },
-        success: function (res) {
-            console.log(JSON.parse(res));
-            // drawSelected(JSON.parse(res), table);
-
-        },
-        error: function (res) {
-            console.log(JSON.stringify(res));
-        }
-
-    })
+function saveAdmin(){
+    console.log("horray!!!");
 }
 
 
@@ -291,3 +250,100 @@ function saveStudent() {
 }
 
 
+//ADMINS
+function getAdmins() {
+    DOM.leftHead.innerHTML = "";
+    DOM.rightHead.innerHTML = "";
+    DOM.overview.innerHTML = "";
+    $.ajax({
+        url: "http://localhost/school/api/index.php?controller=admin&action=get_admins",
+        method: "GET",
+        success: function (res) {
+
+            DOM.rightHead.innerHTML = "Admins <button class='btn btn-primary' onclick='addAdminForm()'><i class='fa fa-plus-circle'></i></button>";
+
+            DOM.courses.remove();
+
+            DOM.students.innerHTML = "";
+
+            drawAdmins(JSON.parse(res));
+
+        },
+        error: function (res) {
+            console.log(JSON.stringify(res));
+        }
+
+    })
+
+}
+function displayAdmin() {
+    DOM.overview.innerHTML = "";
+    var id = this.id;
+    getAdmin(id);
+}
+
+
+function getAdmin(id){
+    $.ajax({
+        url: "http://localhost/school/api/index.php?controller=admin&action=get_admin",
+        method: "GET",
+        data: { id: id },
+        success: function (res) {
+         
+            drawAdmin(JSON.parse(res));
+
+        },
+        error: function (res) {
+            console.log(JSON.stringify(res));
+        }
+
+    })
+}
+
+function delAdmin(){
+    var that = this.parentElement;
+    var id = that.id;
+    // var table = that.getAttribute("table");
+    // console.log(id);
+    // console.log(table);
+console.log(id);
+    $('#myModal').modal('show');
+    $('.delete-confirm').click(function () {
+
+        $.ajax({
+            url: "http://localhost/school/api/index.php?controller=admin&action=del_admin",
+            method: "POST",
+            data: { id: id },
+            success: function (data) {
+                if ($('.modal-header').hasClass('alert-danger')) {
+                    $('.modal-header').removeClass('alert-danger').addClass('alert-success');
+                    //hide ok button as it is not necessary
+                    $('.delete-confirm').css('display', 'none');
+                }
+                $('.success-message').html('deleted successfully!');
+                that.remove();
+                clean();
+                console.log("removed");
+                getAdmins();
+
+
+            },
+            error: function (res) {
+                if (!$('.modal-header').hasClass('alert-danger')) {
+                    $('.modal-header').removeClass('alert-success').addClass('alert-danger');
+                    $('.delete-confirm').css('display', 'none');
+                }
+
+                $('.success-message').html(err.statusText);
+            }
+        });
+
+        $("#myModal").on("hidden.bs.modal", function () {
+            $(".modal-header").removeClass(' ').addClass('alert-danger');
+            $('.delete-confirm').css('display', 'inline-block');
+            $('.success-message').html('').html('Are you sure you wish to delete this?');
+        });
+
+    });
+
+}

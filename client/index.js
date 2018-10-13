@@ -3,9 +3,9 @@
 // function init(){
 //     console.log("the page loads");
 
-   
+getData();
 // }
-let userJob;
+var userJob;
 
 function checkLogin(){
     $.ajax({
@@ -17,7 +17,7 @@ function checkLogin(){
       
        }
        else{
-        getData();
+     
         console.log("checkLogin");
         console.log("you are logged in as " + response);
         $("#hello-user").html("<h5>Hello "+JSON.parse(response)+"</h5>");
@@ -36,6 +36,8 @@ function checkLogin(){
 
     })
 }
+
+
 
 function logInNow() {
 
