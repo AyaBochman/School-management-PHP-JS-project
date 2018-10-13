@@ -42,10 +42,10 @@ class LoginController{
     
            
         }
-        else{
-            echo "incorrect";
+        // else{
+        //     return false;
            
-        }
+        // }
 
     }
      

@@ -30,7 +30,9 @@ class AdminController{
 
 
     public function add_admin(){
-        echo json_encode($this->model->addAdmin($_POST['id']));
+        $psswd = $_POST['adminPass'];
+        $password = PASSWORD_HASH($psswd, PASSWORD_DEFAULT);
+        echo json_encode($this->model->addAdmin($_POST['adminName'],$_POST['adminRole'],$_POST['adminPhone'],$_POST['adminEmail'], $password));
     }
     // public function get_current(){
     //     echo json_encode($this->model->getCurrent($_GET["table"],$_GET["id"]));

@@ -43,6 +43,17 @@ var cFORM = function () {
     }
 }();
 
+var aFORM = function () {
+    return {
+        adminName: document.getElementById("adminName"),
+        adminRole: document.getElementById("adminRole"),
+        adminPhone: document.getElementById("adminPhone"),
+        adminEmail: document.getElementById("adminEmail"),
+        adminPass: document.getElementById("adminPass")
+
+    }
+}();
+
 
 function loadForm(param) {
     

@@ -2,6 +2,7 @@ body{
     background: url('../img/school.jpg');
     background-repeat: no-repeat;
     background-size:cover;
+    overflow-x: hidden;
     background-attachment: fixed;
     
     
@@ -156,7 +157,8 @@ form{
 
 }
 
-.imgPreview{
+ .imgPreview{
+    border-radius: 50px;
     width: 100px;
     height: auto;
 }

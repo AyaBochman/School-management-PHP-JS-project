@@ -19,7 +19,31 @@ function displaySelected() {
 }
 
 function saveAdmin() {
-    console.log("horray!!!");
+    if (status == "add") {
+        var adminName = aFORM.adminName.value;
+        var adminRole = aFORM.adminRole.value;
+        var adminPhone = aFORM.adminPhone.value;
+        var adminEmail = aFORM.adminEmail.value;
+        var adminPass = aFORM.adminPass.value;
+
+
+        $.ajax({
+            url: "http://localhost/school/api/index.php?controller=admin&action=add_admin",
+            method: "POST",
+            data: { adminName: adminName, adminRole: adminRole, adminPhone: adminPhone,adminEmail: adminEmail,
+                adminPass: adminPass },
+            success: function (res) {
+                console.log("added");
+                clean();
+                // getAdmin(JSON.parse(res));
+                // getAdmins();
+            },
+            error: function (res) {
+                console.log(JSON.stringify(res));
+            }
+
+        })
+    }
 }
 
 
@@ -265,7 +289,7 @@ function getAdmins() {
 
             DOM.rightHead.innerHTML = "Admins <button class='btn btn-primary' onclick='addAdminForm()'><i class='fa fa-plus-circle'></i></button>";
 
-            DOM.courses.remove();
+            DOM.courses.innerHTML = "";
 
             DOM.students.innerHTML = "";
 
@@ -306,7 +330,7 @@ function getAdmin(id) {
 function delAdmin() {
     var that = this.parentElement;
     var id = that.id;
-    console.log(id);
+    
     $('#myModal').modal('show');
     $('.delete-confirm').click(function () {
 

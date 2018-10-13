@@ -39,9 +39,9 @@ return $data;
   }
   
   public function addAdmin($name,$role,$phone,$email,$password){
-    $q = "INSERT INTO students (name,phone,email) VALUES (?, ?, ?)";
+    $q = "INSERT INTO admins (name,role,phone,email,password) VALUES (?, ?, ?, ?, ?)";
     $stmt = $this->dbc->Prepare($q);
-    $stmt->bind_param("sis",$name,$phone,$email);
+    $stmt->bind_param("siiss",$name,$role,$phone,$email,$password);
     $stmt->execute();
     return $stmt->insert_id;
   }
