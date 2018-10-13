@@ -1,4 +1,4 @@
-checkLogin();
+// checkLogin();
 
 // getData();
 // function init(){
@@ -14,12 +14,11 @@ function displaySelected() {
     var table = this.getAttribute("table");
 
     getCurrent(id, table);
-    getEnrolled(id, table);
-    getNames(id, table);
+
 
 }
 
-function saveAdmin(){
+function saveAdmin() {
     console.log("horray!!!");
 }
 
@@ -32,7 +31,10 @@ function getCurrent(id, table) {
         data: { id: id, table: table },
         success: function (res) {
             // console.log(JSON.parse(res));
+
             drawSelected(JSON.parse(res), table);
+            getEnrolled(id, table);
+            getNames(id, table);
 
         },
         error: function (res) {
@@ -254,6 +256,7 @@ function saveStudent() {
 function getAdmins() {
     DOM.leftHead.innerHTML = "";
     DOM.rightHead.innerHTML = "";
+    DOM.overviewHead.innerText = "Overview";
     DOM.overview.innerHTML = "";
     $.ajax({
         url: "http://localhost/school/api/index.php?controller=admin&action=get_admins",
@@ -283,13 +286,13 @@ function displayAdmin() {
 }
 
 
-function getAdmin(id){
+function getAdmin(id) {
     $.ajax({
         url: "http://localhost/school/api/index.php?controller=admin&action=get_admin",
         method: "GET",
         data: { id: id },
         success: function (res) {
-         
+
             drawAdmin(JSON.parse(res));
 
         },
@@ -300,13 +303,13 @@ function getAdmin(id){
     })
 }
 
-function delAdmin(){
+function delAdmin() {
     var that = this.parentElement;
     var id = that.id;
     // var table = that.getAttribute("table");
     // console.log(id);
     // console.log(table);
-console.log(id);
+    console.log(id);
     $('#myModal').modal('show');
     $('.delete-confirm').click(function () {
 

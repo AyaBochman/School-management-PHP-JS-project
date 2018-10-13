@@ -69,6 +69,7 @@ form{
 .card{
     text-align: center;
     padding: 20px;
+    background: rgba(104, 194, 232, 0.2);
 }
 #studentForm,#courseForm{
     text-align: center;
