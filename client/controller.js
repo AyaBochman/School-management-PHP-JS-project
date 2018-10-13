@@ -184,6 +184,7 @@ function drawSelected(p, table) {
 
     DOM.overviewHead.innerText = p[0].name;
     var card = document.getElementsByName("template")[0].cloneNode(true);
+    card.querySelector("#theName").remove();
     card.style.display = "inline-block";
     //delete
     var delBtn = document.createElement("button");
@@ -205,7 +206,7 @@ function drawSelected(p, table) {
             card.id = p[0].id;
             card.setAttribute("table", "students");
             card.querySelector("#img").src = p[0].image;
-            card.querySelector("#theName").innerHTML = p[0].name;
+            // card.querySelector("#theName").innerHTML = p[0].name;
             card.querySelector("#thePhone").innerHTML = p[0].phone;
             card.querySelector("#theEmail").innerHTML = p[0].email;
             card.appendChild(delBtn);
@@ -217,7 +218,7 @@ function drawSelected(p, table) {
             card.id = p[0].id;
             card.setAttribute("table", "courses");
             card.querySelector("#img").src = p[0].image;
-            card.querySelector("#theName").innerHTML = p[0].name;
+            // card.querySelector("#theName").innerHTML = p[0].name;
             card.querySelector("#thedesc").innerHTML = p[0].description;
             if(userJob != "sales"){
                 card.appendChild(delBtn);
@@ -295,9 +296,10 @@ function displayName(array) {
     
     if (array != "") {
         for (i = 0; i < array.length; i++) {
-            var dname = document.createElement("p");
+            var dname = document.createElement("li");
+            dname.style.listStyle = "none";
             dname.innerText = array[i].name;
-            DOM.overview.appendChild(dname);
+            $("#enrolled").append(dname);
 
 
         }
