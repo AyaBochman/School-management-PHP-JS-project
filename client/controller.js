@@ -109,6 +109,9 @@ function drawAdmins(array) {
 
 function adminLi(singleAdmin) {
     var li = document.createElement("li");
+    var img = document.createElement("img");
+    img.classList.add("adm-image");
+    img.src = singleAdmin.image;
     var text = document.createElement("p");
     text.classList.add("li-text");
     li.classList.add("list-group-item");
@@ -116,6 +119,8 @@ function adminLi(singleAdmin) {
     li.id = singleAdmin.id;
     li.setAttribute("table", "admins");
     li.appendChild(text);
+    li.appendChild(img);
+   
     li.addEventListener("click", displayAdmin);
     return li;
 }
@@ -239,7 +244,6 @@ function drawSelected(p, table) {
 function drawAdmin(admin){
     DOM.overviewHead.innerText = admin[0].name;
     var card = document.getElementsByName("template")[0].cloneNode(true);
-    card.querySelector("#img").remove();
     card.style.display = "inline-block";
        //delete
        var delBtn = document.createElement("button");
@@ -256,7 +260,8 @@ function drawAdmin(admin){
     //    editBtn.addEventListener('click', editAdmin);
     card.id = admin[0].id;
     card.setAttribute("table", "admins");
-    card.querySelector("#theName").innerHTML = admin[0].name + ", " + admin[0].role;
+    card.querySelector("#img").src = admin[0].image;
+    card.querySelector("#theName").innerHTML = "Role: " + admin[0].role;
     card.querySelector("#thePhone").innerHTML = admin[0].phone;
     card.querySelector("#theEmail").innerHTML = admin[0].email;
    

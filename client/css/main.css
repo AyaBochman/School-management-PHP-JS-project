@@ -86,6 +86,14 @@ body{
     height: auto;
 }
 
+.adm-image{
+    width: 70px;
+    height: auto;
+    display: inline-block;
+    position: absolute;
+    top: 16%;
+    right: 5%;
+}
 
 .li-text{
     display: inline-block;

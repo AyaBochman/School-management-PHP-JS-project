@@ -6,7 +6,7 @@ class AdminModel extends Model{
 
   public function getAdmins(){
   
-    $data = $this->dbc->Select("SELECT admins.id,name,phone,email,roles.role_name as role FROM admins inner join roles on admins.role = roles.id");
+    $data = $this->dbc->Select("SELECT admins.id,name,phone,email,image,roles.role_name as role FROM admins inner join roles on admins.role = roles.id");
      if(isset($_SESSION['currentUser']) && $_SESSION['role'] != "sales"){
       return $data;
      }
@@ -15,7 +15,7 @@ class AdminModel extends Model{
   }
 
   public function getCurrAdmin($id){
-    $data = $this->dbc->Select("SELECT admins.id,name,phone,email,roles.role_name as role FROM admins 
+    $data = $this->dbc->Select("SELECT admins.id,name,phone,email,image,roles.role_name as role FROM admins 
     inner join roles on admins.role = roles.id WHERE admins.id =".$id);
 
 return $data;
@@ -38,6 +38,13 @@ return $data;
     }
   }
   
+  public function addAdmin($name,$role,$phone,$email,$password){
+    $q = "INSERT INTO students (name,phone,email) VALUES (?, ?, ?)";
+    $stmt = $this->dbc->Prepare($q);
+    $stmt->bind_param("sis",$name,$phone,$email);
+    $stmt->execute();
+    return $stmt->insert_id;
+  }
 
 
 

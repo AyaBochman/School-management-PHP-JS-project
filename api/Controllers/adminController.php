@@ -27,6 +27,11 @@ class AdminController{
     public function del_admin(){
     echo json_encode($this->model->delAdmin($_POST['id']));
     }
+
+
+    public function add_admin(){
+        echo json_encode($this->model->addAdmin($_POST['id']));
+    }
     // public function get_current(){
     //     echo json_encode($this->model->getCurrent($_GET["table"],$_GET["id"]));
     //     // $this->model->getNames($_GET["table"],$_GET["id"]);
