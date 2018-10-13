@@ -6,33 +6,35 @@
 // }
 
 
-// function logInNow() {
+function logInNow() {
 
-//     var email = document.getElementById("email").value;
-//     var password = document.getElementById("password").value;
-//     $.ajax({
-//         method: "POST",
-//         url: "http://localhost/school/api/index.php?controller=login&action=login",
-//         data: { email: email, password: password },
-//         success: function (response) {
-//             console.log(response);
-//             localStorage.setItem("currentUser", JSON.stringify(email));
-//             window.location.href = response;
+    var email = $("#email").val();
+    // document.getElementById("email").value;
+    var password = $("#password").val();
+    // document.getElementById("password").value;
+    $.ajax({
+        method: "POST",
+        url: "http://localhost/school/api/index.php?controller=login&action=login",
+        data: { email: email, password: password },
+        success: function (response) {
+            console.log(response);
+            localStorage.setItem("currentUser", JSON.stringify(email));
+            window.location.href = response;
            
 
-//         },
-//         error: function (response) {
-//             alert("oops");
-//         }
+        },
+        error: function (response) {
+            alert("oops");
+        }
 
-//     })
+    })
 
-// }
+}
 
 //LOGIN
 var working = false;
 $('.login').on('submit', function(e) {
-   
+    
   e.preventDefault();
   if (working) return;
   working = true;
@@ -40,6 +42,7 @@ $('.login').on('submit', function(e) {
     $state = $this.find('button > .state');
   $this.addClass('loading');
   $state.html('Authenticating');
+ 
   setTimeout(function() {
     $this.addClass('ok');
     $state.html('Welcome back!');

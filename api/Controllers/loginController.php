@@ -36,16 +36,16 @@ class LoginController{
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $result = $this->model->loginAction($_POST['email'],$_POST['password']);
         if($result){
-            // echo json_encode($result);
            
             echo "http://localhost/school/client/index.html";
+            // echo "success";
     
            
         }
-        // else{
-        //     return false;
+        else{
+           echo "not good";
            
-        // }
+        }
 
     }
      

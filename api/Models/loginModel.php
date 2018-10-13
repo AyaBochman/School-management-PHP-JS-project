@@ -13,17 +13,20 @@ class LoginModel extends Model {
     // }
 
     public function loginAction($email, $password){
-        $loggedInUser = array();
+        
         // $q = "SELECT * FROM admins where password = '$password' and email = '$email'";
-        $q = "SELECT admins.name,roles.role_name FROM admins inner join roles on admins.id = roles.id WHERE password = '$password' and email = '$email'";
+        $q = "SELECT admins.name,roles.role_name FROM admins 
+        left join roles on admins.role = roles.id WHERE password = '$password' and email = '$email'";
         $loggedInUser = $this->dbc->Select($q);
-        $_SESSION['currentUser'] = $loggedInUser[0];
+        
         
         if(count($loggedInUser) > 0 ){
-            
+            $_SESSION['currentUser'] = $loggedInUser[0];
+           
             return true;
         }
         else{
+            print_r($loggedInUser);
             return false;
         }
 
