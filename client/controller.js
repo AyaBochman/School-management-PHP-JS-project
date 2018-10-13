@@ -278,7 +278,6 @@ function displayName(array) {
 
 
 
-
 // function chooseCourses() {
 //     $.ajax({
 //         url: "http://localhost/school/api/index.php?controller=home&action=get_courses",

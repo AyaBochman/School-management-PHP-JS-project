@@ -1,5 +1,5 @@
 checkLogin();
-// getData();
+
 
 
 function getAdmins() {
