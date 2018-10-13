@@ -52,6 +52,12 @@ class LoginController{
        
         }
 
+    public function logout(){
+        unset($_SESSION['currentUser']);
+ session_destroy();
+ echo json_encode("you logged out successfully");
+    }
+
     
        
 

@@ -16,7 +16,7 @@ function checkLogin(){
       
        }
        else{
-          
+        getData();
         console.log("checkLogin");
         console.log("you are logged in as " + response);
         
@@ -77,10 +77,27 @@ function getData() {
 }
 
 
+function logout(){
+    $.ajax({
+        method: "POST",
+        url: "http://localhost/school/api/index.php?controller=login&action=logout",
+        success: function (response) {
+            console.log(response);
+            localStorage.removeItem("currentUser");
+            window.location.href = "http://localhost/school/client/login.html";
+           
 
-$("#logout").click(function(){
-    console.log("bye");
-})
+        },
+        error: function (response) {
+            alert("oops");
+        }
+
+    })
+}
+
+// $("#logout").click(function(){
+   
+// })
    
 
    // function init() {

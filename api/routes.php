@@ -1,6 +1,6 @@
 <?php
 //$controller = somthing and $action = somthing
-$controllers = array("login" => ["login"],"admin" => ["get_admins"], "home" => ["get_data","get_current","del_current","get_enrolled_students","get_courses_names","get_enrolled_courses","get_students_names"],
+$controllers = array("login" => ["login","logout"],"admin" => ["get_admins"], "home" => ["get_data","get_current","del_current","get_enrolled_students","get_courses_names","get_enrolled_courses","get_students_names"],
 "student" => ["add_student","update_student"], "course" =>["add_course","update_course"]); //, "cart"=>["add_product","get_cart","getCurrentCart"]
 
 if(array_key_exists($controller,$controllers)){ //do we have such controller
