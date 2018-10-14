@@ -17,11 +17,11 @@ function getData() {
             DOM.students.innerHTML = "";
             DOM.courses.innerHTML = "";
             draw(JSON.parse(res));
-            if(document.body.contains( sFORM.courseChoose)){
+            if (document.body.contains(sFORM.courseChoose)) {
                 loadCourses(JSON.parse(res));
             }
-            
-          
+
+
 
         },
         error: function (res) {
@@ -55,8 +55,10 @@ function saveAdmin() {
         $.ajax({
             url: "http://localhost/school/api/index.php?controller=admin&action=add_admin",
             method: "POST",
-            data: { adminName: adminName, adminRole: adminRole, adminPhone: adminPhone,adminEmail: adminEmail,
-                adminPass: adminPass },
+            data: {
+                adminName: adminName, adminRole: adminRole, adminPhone: adminPhone, adminEmail: adminEmail,
+                adminPass: adminPass
+            },
             success: function (res) {
                 console.log("added");
                 clean();
@@ -258,22 +260,32 @@ function saveStudent() {
         var name = sFORM.name.value;
         var phone = sFORM.phone.value;
         var email = sFORM.email.value;
+        var check = sFORM.checkbox;
+        for (i = 0; i < check.length; i++) {
+            if (check[i].checked === true) {
 
-
-        $.ajax({
-            url: "http://localhost/school/api/index.php?controller=student&action=add_student",
-            method: "POST",
-            data: { name: name, phone: phone, email: email },
-            success: function (res) {
-                clean();
-                getCurrent(JSON.parse(res), "students");
-                getData();
-            },
-            error: function (res) {
-                console.log(JSON.stringify(res));
+                console.log(check[i].value);
             }
 
-        })
+
+
+        }
+
+
+        // $.ajax({
+        //     url: "http://localhost/school/api/index.php?controller=student&action=add_student",
+        //     method: "POST",
+        //     data: { name: name, phone: phone, email: email },
+        //     success: function (res) {
+        //         clean();
+        //         getCurrent(JSON.parse(res), "students");
+        //         getData();
+        //     },
+        //     error: function (res) {
+        //         console.log(JSON.stringify(res));
+        //     }
+
+        // })
     }
     if (status == "edit") {
         var id = sFORM.id.value;
@@ -355,7 +367,7 @@ function getAdmin(id) {
 function delAdmin() {
     var that = this.parentElement;
     var id = that.id;
-    
+
     $('#myModal').modal('show');
     $('.delete-confirm').click(function () {
 

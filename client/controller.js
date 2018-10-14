@@ -27,7 +27,7 @@ var sFORM = function () {
         email: document.getElementById("email"),
         image: document.getElementById("image"),
         courseChoose: document.getElementById("coursesChoose"),
-        checkbox: document.getElementsByName("course"),
+        checkbox: document.getElementsByName("check_list[]"),
         submitBtn: document.getElementById("submitBtn")
     }
 }();
