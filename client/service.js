@@ -4,7 +4,32 @@
 // function init(){
 //     console.log("refresh");
 // }
+getData();
 
+function getData() {
+
+    $.ajax({
+        url: "http://localhost/school/api/index.php?controller=home&action=get_data",
+        method: "GET",
+        success: function (res) {
+            DOM.leftHead.innerHTML = "Courses <button class='btn btn-primary' id='addCourseBtn' onclick='addCourseForm()'><i class='fa fa-plus-circle'></i></button>";
+            DOM.rightHead.innerHTML = "Students <button class='btn btn-primary' id='addStudentBtn' onclick='addStudentForm()'><i class='fa fa-plus-circle'></i></button>"
+            DOM.students.innerHTML = "";
+            DOM.courses.innerHTML = "";
+            draw(JSON.parse(res));
+            if(document.body.contains( sFORM.courseChoose)){
+                loadCourses(JSON.parse(res));
+            }
+            
+          
+
+        },
+        error: function (res) {
+            console.log(JSON.stringify(res));
+        }
+
+    })
+}
 
 
 

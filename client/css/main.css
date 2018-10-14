@@ -163,6 +163,20 @@ form{
     height: auto;
 }
 
+.choises{
+    border: 2px solid transparent;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 5px;
+    background: rgba(104, 194, 232, 0.8);
+    width: 200px;
+    transition: all 0.5s;
+}
+
+.choises:hover{
+    border: 1px solid white;
+}
+
 /* ================================================ */
 
 

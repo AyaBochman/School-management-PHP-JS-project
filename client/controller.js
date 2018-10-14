@@ -89,8 +89,6 @@ function addAdminForm(){
 //the status of the form edit/add
 var status;
 
-//COURSES MAIN VIEW
-
 
 function draw(array) {
     if (array !== "") {
@@ -358,12 +356,21 @@ function displayName(array) {
 
 // }
 
+function loadCourses(array){
+    for (i = 0; i < array[0].length; i++) {
+
+        sFORM.courseChoose.appendChild(courseName(array[0][i]));
+    }
+}
+
+
 function courseName(singleCourse) {
-    var li = document.createElement("li");
+    var li = document.createElement("span");
     var checkInp = document.createElement("input");
     checkInp.type = "checkbox";
     checkInp.name = "check_list[]";
-    li.classList.add("list-group-item");
+    li.classList.add("choises");
+   
     li.innerText = singleCourse.name + " ";
     checkInp.value = singleCourse.id;
     li.appendChild(checkInp);

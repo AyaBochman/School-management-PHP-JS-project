@@ -7,6 +7,7 @@ init();
 // checkLogin();
 var userJob;
 
+
 function checkLogin(){
     $.ajax({
         method: "GET",
@@ -39,22 +40,32 @@ function checkLogin(){
 }
 
 
-function getData() {
 
-    $.ajax({
-        url: "http://localhost/school/api/index.php?controller=home&action=get_data",
-        method: "GET",
-        success: function (res) {
-            DOM.leftHead.innerHTML = "Courses <button class='btn btn-primary' id='addCourseBtn' onclick='addCourseForm()'><i class='fa fa-plus-circle'></i></button>";
-            DOM.rightHead.innerHTML = "Students <button class='btn btn-primary' id='addStudentBtn' onclick='addStudentForm()'><i class='fa fa-plus-circle'></i></button>"
-            DOM.students.innerHTML = "";
-            DOM.courses.innerHTML = "";
-            draw(JSON.parse(res));
+// function getData() {
 
-        },
-        error: function (res) {
-            console.log(JSON.stringify(res));
-        }
+//     $.ajax({
+//         url: "http://localhost/school/api/index.php?controller=home&action=get_data",
+//         method: "GET",
+//         success: function (res) {
+//             DOM.leftHead.innerHTML = "Courses <button class='btn btn-primary' id='addCourseBtn' onclick='addCourseForm()'><i class='fa fa-plus-circle'></i></button>";
+//             DOM.rightHead.innerHTML = "Students <button class='btn btn-primary' id='addStudentBtn' onclick='addStudentForm()'><i class='fa fa-plus-circle'></i></button>"
+//             DOM.students.innerHTML = "";
+//             DOM.courses.innerHTML = "";
+//             draw(JSON.parse(res));
+//             datac = res;
+//            console.log("inside: "+datac);
 
-    })
-}
+//         },
+//         error: function (res) {
+//             console.log(JSON.stringify(res));
+//         }
+
+//     })
+// }
+
+
+// function getCourses(smt){
+// console.log(smt);
+// }
+
+// getCourses(data[0]);
