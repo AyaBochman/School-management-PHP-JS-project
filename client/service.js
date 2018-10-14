@@ -261,31 +261,30 @@ function saveStudent() {
         var phone = sFORM.phone.value;
         var email = sFORM.email.value;
         var check = sFORM.checkbox;
+        var myCourses = [];
         for (i = 0; i < check.length; i++) {
             if (check[i].checked === true) {
-
                 console.log(check[i].value);
+                myCourses.push(check[i].value);
             }
-
-
-
+            
         }
 
+        console.log(myCourses);
+        $.ajax({
+            url: "http://localhost/school/api/index.php?controller=student&action=add_student",
+            method: "POST",
+            data: { name: name, phone: phone, email: email , myCourses: myCourses},
+            success: function (res) {
+                clean();
+                getCurrent(JSON.parse(res), "students");
+                getData();
+            },
+            error: function (res) {
+                console.log(JSON.stringify(res));
+            }
 
-        // $.ajax({
-        //     url: "http://localhost/school/api/index.php?controller=student&action=add_student",
-        //     method: "POST",
-        //     data: { name: name, phone: phone, email: email },
-        //     success: function (res) {
-        //         clean();
-        //         getCurrent(JSON.parse(res), "students");
-        //         getData();
-        //     },
-        //     error: function (res) {
-        //         console.log(JSON.stringify(res));
-        //     }
-
-        // })
+        })
     }
     if (status == "edit") {
         var id = sFORM.id.value;

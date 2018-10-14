@@ -12,6 +12,7 @@ class StudentController{
 
     public function add_student(){
         echo json_encode($this->model->saveStudent($_POST['name'],$_POST['phone'],$_POST['email']));
+        echo json_encode($this->model->saveEnrolled($_POST['myCourses']));
 
 }
        
