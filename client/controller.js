@@ -75,7 +75,6 @@ function loadForm(param) {
 //ADD STUDENT FORM
 function addStudentForm() {
     status = "add";
-    console.log("add mode");
     DOM.overviewHead.innerText = "Add a new Student";
     loadForm("students");
     // chooseCourses();
@@ -85,7 +84,6 @@ function addStudentForm() {
 function addCourseForm() {
     status = "add";
     DOM.overviewHead.innerText = "Add a new Course";
-    console.log("add mode");
     loadForm("courses");
 }
 

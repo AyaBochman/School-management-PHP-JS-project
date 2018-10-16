@@ -221,7 +221,8 @@ function saveCourse() {
             data: { courseName: courseName, desc: desc },
             success: function (res) {
                 clean();
-                getCurrent(JSON.parse(res), "courses");
+                
+                getCurrent(res, "courses");
                 getData();
             },
             error: function (res) {
@@ -270,14 +271,14 @@ function saveStudent() {
             
         }
 
-        console.log(myCourses);
         $.ajax({
             url: "http://localhost/school/api/index.php?controller=student&action=add_student",
             method: "POST",
             data: { name: name, phone: phone, email: email , myCourses: myCourses},
             success: function (res) {
                 clean();
-                getCurrent(JSON.parse(res), "students");
+                // console.log(res);
+                getCurrent(res, "students");
                 getData();
             },
             error: function (res) {

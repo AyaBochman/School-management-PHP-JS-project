@@ -23,7 +23,8 @@ class StudentModel extends Model{
        
                 }
             }   
-                return $stmt1->insert_id;
+                $stmt->insert_id;
+                return $theId;
 
     }
 

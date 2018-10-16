@@ -1,32 +1,52 @@
-
-
-    <div class="form-group">
+<!-- <div class="form-group">
         <input type="hidden" class="form-control" id="courseId">
-    </div>
-    <div class="form-group">
+    </div> -->
+<div class="row">
+    <div class="offset-3 col-sm-6">
 
-        <label>Course Name</label>
-        <input type="text" class="form-control" id="courseName" name="courseName" placeholder="Enter course name">
-    </div>
-    <div class="form-group">
-        <label>Description</label><br>
-        <textarea class="form-control" name="desc" id="desc" cols="35" rows="5"></textarea>
+        <div class="form-group">
+
+            <label>Course Name</label>
+            <input type="text" class="form-control" id="courseName" name="courseName" placeholder="Enter course name">
+        </div>
+
     </div>
 
+</div>
 
-    <form id="imgFormCourse" action="">
-            <div class="form-group">
-                <label>Course picture</label>
-                <!-- <input type="text" class="form-control" id="image" name="image"> -->
-                <input type="file" class="form-control" id="file" name="file">
+<div class="row">
+    <div class="offset-2 col-sm-8">
+        <div class="form-group">
+            <label>Description</label><br>
+            <textarea class="form-control" name="desc" id="desc" cols="35" rows="5"></textarea>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="offset-2 col-sm-3">
+        <div class="form-group">
+            <label>Course picture</label>
+            <input type="file" id="file">
+
+        </div>
+    </div>
+    <div class="offset-2 col-sm-3">
+        <div class="form-group">
                 <img class="imgPreview" src="img/course.jpg" alt="your image">
-    
-            </div>
-        </form>
-   
+        </div>
+    </div>
+</div>
 
 
-   <button class="btn btn-secondary" type="submit" onclick="saveCourse()" > Save </button>
+
+
+
+
+
+
+
+<button class="btn btn-secondary" type="submit" onclick="saveCourse()"> Save </button>
 
 
 <script src="jq.js"></script>
@@ -36,4 +56,4 @@
     crossorigin="anonymous"></script>
 <!-- <script src="index.js"></script> -->
 <script src="service.js"></script>
-<script src="controller.js"></script> 
+<script src="controller.js"></script>
