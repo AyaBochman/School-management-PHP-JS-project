@@ -1,9 +1,6 @@
 <p class="statusMsg"></p>
 <!-- <form id="studentForm" enctype="multipart/form-data"> -->
-
-<div class="form-group">
-    <input type="hidden" class="form-control" id="theId">
-</div>
+    <form enctype="multipart/form-data" id="studentForm">
 <div class="row">
 
     <div class="col-sm-6 form-group">
@@ -25,7 +22,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             <label>Profile picture</label>
-            <input type="file" id="file">
+            <input type="file" id="file" name="file">
         </div>
     </div>
 </div>
@@ -57,7 +54,7 @@
 
 <button class="btn btn-secondary" onclick="saveStudent()"> Save </button>
 
-<!-- </form> -->
+</form>
 
 
 <script src="jq.js"></script>

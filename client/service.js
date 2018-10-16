@@ -153,10 +153,11 @@ function delCurrent(id, table) {
                     $('.delete-confirm').css('display', 'none');
                 }
                 $('.success-message').html('deleted successfully!');
-
+                
                 that.remove();
                 clean();
-                console.log("removed");
+                DOM.overviewHead.innerText = "Overview";
+                
                 getData();
 
 
@@ -188,6 +189,7 @@ function delCurrent(id, table) {
 function editCurrent() {
     status = "edit";
     var that = this.parentElement;
+    console.log(that);
     var id = that.id;
     var table = that.getAttribute("table");
     loadForm(table);
@@ -211,25 +213,38 @@ function editCurrent() {
 //ADD//UPDATE COURSE TO DB
 function saveCourse() {
     if (status == "add") {
-        var courseName = cFORM.courseName.value;
-        var desc = cFORM.desc.value;
-        // var courseImage = cFORM.email.value;
-
+        let form = new FormData($("form")[0]);
         $.ajax({
+            type: "POST",
             url: "http://localhost/school/api/index.php?controller=course&action=add_course",
-            method: "POST",
-            data: { courseName: courseName, desc: desc },
+            data: form,
+            contentType: false,
+            cache: false,
+            processData: false,
             success: function (res) {
-                clean();
-                
                 getCurrent(res, "courses");
                 getData();
-            },
-            error: function (res) {
-                console.log(JSON.stringify(res));
             }
+        });
+        // var courseName = cFORM.courseName.value;
+        // var desc = cFORM.desc.value;
+        // // var courseImage = cFORM.email.value;
 
-        })
+        // $.ajax({
+        //     url: "http://localhost/school/api/index.php?controller=course&action=add_course",
+        //     method: "POST",
+        //     data: { courseName: courseName, desc: desc },
+        //     success: function (res) {
+        //         clean();
+
+        //         getCurrent(res, "courses");
+        //         getData();
+        //     },
+        //     error: function (res) {
+        //         console.log(JSON.stringify(res));
+        //     }
+
+        // })
     }
     if (status == "edit") {
         var id = cFORM.id.value;
@@ -258,35 +273,60 @@ function saveCourse() {
 
 function saveStudent() {
     if (status == "add") {
-        var name = sFORM.name.value;
-        var phone = sFORM.phone.value;
-        var email = sFORM.email.value;
-        var check = sFORM.checkbox;
-        var myCourses = [];
-        for (i = 0; i < check.length; i++) {
-            if (check[i].checked === true) {
-                console.log(check[i].value);
-                myCourses.push(check[i].value);
-            }
-            
-        }
+        // var check = sFORM.checkbox;
+        // // var myCourses = [];
+        // // for (i = 0; i < check.length; i++) {
+        // //     if (check[i].checked === true) {
+        // //         console.log(check[i].value);
+        // //         myCourses.push(check[i].value);
+        // //     }
 
+        // // }
+        let form = new FormData($("form")[0]);
+   
         $.ajax({
+            type: "POST",
             url: "http://localhost/school/api/index.php?controller=student&action=add_student",
-            method: "POST",
-            data: { name: name, phone: phone, email: email , myCourses: myCourses},
+            data: form,
+            contentType: false,
+            cache: false,
+            processData: false,
             success: function (res) {
-                clean();
-                // console.log(res);
                 getCurrent(res, "students");
                 getData();
-            },
-            error: function (res) {
-                console.log(JSON.stringify(res));
             }
-
-        })
+        });
     }
+
+    // var name = sFORM.name.value;
+    // var phone = sFORM.phone.value;
+    // var email = sFORM.email.value;
+    // var check = sFORM.checkbox;
+    // var myCourses = [];
+    // for (i = 0; i < check.length; i++) {
+    //     if (check[i].checked === true) {
+    //         console.log(check[i].value);
+    //         myCourses.push(check[i].value);
+    //     }
+
+    // }
+
+    // $.ajax({
+    //     url: "http://localhost/school/api/index.php?controller=student&action=add_student",
+    //     method: "POST",
+    //     data: { name: name, phone: phone, email: email , myCourses: myCourses},
+    //     success: function (res) {
+    //         clean();
+    //         // console.log(res);
+    //         getCurrent(res, "students");
+    //         getData();
+    //     },
+    //     error: function (res) {
+    //         console.log(JSON.stringify(res));
+    //     }
+
+    // })
+
     if (status == "edit") {
         var id = sFORM.id.value;
         var name = sFORM.name.value;

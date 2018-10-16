@@ -55,7 +55,7 @@ body{
 /* INFO NAV DISPLAY */
 
 #rowHeaders{
-    background: rgba(104, 194, 232, 0.8);
+    background: #0d1d3f;
     color: white;
     height: 60px;
     padding: 11px;
@@ -85,6 +85,7 @@ body{
     display: inline-block;
     width: 70px;
     height: auto;
+    border-radius: 100px;
 }
 
 .adm-image{
@@ -113,7 +114,8 @@ left: 37%;
 }
 
 #img{
-    width: 150px;
+    width: 200px;
+    border-radius: 100px;
 }
 .card{
     text-align: center;
@@ -128,18 +130,24 @@ left: 37%;
     text-align: center;
 }
 
-.btn-success,.btn-danger{
+.span-del,.span-edit{
     margin: 10px;
     position: absolute;
     top: 10px;
+    cursor: pointer;
 }
+/* .btn-success,.btn-danger{
+ 
+} */
 
-.btn-success{
+.span-edit{
     left: 10px;
+    color: darkgreen;
 }
 
-.btn-danger{
+.span-del{
     right: 10px;
+    color: darkred;
 }
 
 /* ================================================ */

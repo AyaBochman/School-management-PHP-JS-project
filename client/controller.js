@@ -188,14 +188,14 @@ function studentLi(singleStudent) {
 function fillForm(result, param) {
     switch (param) {
         case "students":
-            sFORM.id.value = result[0].id;
+           
             sFORM.name.value = result[0].name;
             sFORM.phone.value = result[0].phone;
             sFORM.email.value = result[0].email;
             break;
 
         case "courses":
-            cFORM.id.value = result[0].id;
+        
             cFORM.courseName.value = result[0].name;
             cFORM.desc.value = result[0].description;
             break;
@@ -210,17 +210,17 @@ function drawSelected(p, table) {
     card.querySelector("#theName").remove();
     card.style.display = "inline-block";
     //delete
-    var delBtn = document.createElement("button");
-    delBtn.classList.add("btn");
-    delBtn.classList.add("btn-danger");
-    delBtn.innerText = "Delete";
+    var delBtn = document.createElement("span");
+    // delBtn.classList.add("btn");
+    delBtn.classList.add("span-del");
+    delBtn.innerHTML = "<i class='fas fa-user-minus fa-2x'></i>";
     delBtn.addEventListener('click', delCurrent);
 
     //edit
-    var editBtn = document.createElement("button");
-    editBtn.classList.add("btn");
-    editBtn.classList.add("btn-success");
-    editBtn.innerText = "Edit";
+    var editBtn = document.createElement("span");
+    // editBtn.classList.add("btn");
+    editBtn.classList.add("span-edit");
+    editBtn.innerHTML = "<i class='fas fa-user-edit fa-2x'></i>";
     editBtn.addEventListener('click', editCurrent);
 
     switch (table) {
@@ -238,6 +238,8 @@ function drawSelected(p, table) {
             break;
 
         case "courses":
+        editBtn.innerHTML = "<i class='fas fa-edit fa-2x'></i>";
+        delBtn.innerHTML = "<i class='fas fa-trash-alt fa-2x'></i>";
             card.id = p[0].id;
             card.setAttribute("table", "courses");
             card.querySelector("#img").src = p[0].image;

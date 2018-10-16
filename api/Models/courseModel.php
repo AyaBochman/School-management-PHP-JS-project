@@ -5,11 +5,11 @@ require_once("Model.php");
 class CourseModel extends Model{
 
 
-    public function saveCourse($name,$desc){
+    public function saveCourse($name,$desc,$image){
         if(isset($_SESSION['currentUser']) && $_SESSION['role'] != "sales"){
-            $q = "INSERT INTO courses (name,description) VALUES (?, ?)";
+            $q = "INSERT INTO courses (name,description,image) VALUES (?, ?, ?)";
             $stmt = $this->dbc->Prepare($q);
-            $stmt->bind_param("ss",$name,$desc);
+            $stmt->bind_param("sss",$name,$desc,$image);
             $stmt->execute();
             return $stmt->insert_id;
 

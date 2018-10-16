@@ -12,8 +12,23 @@ class CourseController{
 
 
             public function add_course(){
-              
-             echo json_encode($this->model->saveCourse($_POST['courseName'],$_POST['desc']));
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                   
+                    $name = $_POST['courseName'];
+                    $desc = $_POST['desc'];
+                 
+                    if(!empty($_FILES['file']['name'])){
+                        $fileName = time().'_'.$_FILES['file']['name'];
+                        $sourcePath = $_FILES['file']['tmp_name'];
+                        $targetPath = "../client/img/".$fileName;
+                        if(move_uploaded_file($sourcePath,$targetPath)){
+                            echo "file saved";
+                        }else echo "file was not saved";
+                    }else{
+                        $targetPath = "../client/img/course.jpg";
+                    }
+                }
+             echo json_encode($this->model->saveCourse($name,$desc,$targetPath));
                 
         }
 

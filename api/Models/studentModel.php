@@ -5,11 +5,11 @@ require_once("Model.php");
 class StudentModel extends Model{
 
 
-    public function saveStudent($name,$phone,$email,$enrolled){
+    public function saveStudent($name,$phone,$email,$enrolled,$file){
        
-            $q = "INSERT INTO students (name,phone,email) VALUES (?, ?, ?)";
+            $q = "INSERT INTO students (name,phone,email,image) VALUES (?, ?, ?, ?)";
             $stmt = $this->dbc->Prepare($q);
-            $stmt->bind_param("sis",$name,$phone,$email);
+            $stmt->bind_param("siss",$name,$phone,$email,$file);
             $stmt->execute();
           
 //enrolled query to student_course table

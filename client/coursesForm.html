@@ -1,6 +1,7 @@
 <!-- <div class="form-group">
         <input type="hidden" class="form-control" id="courseId">
     </div> -->
+    <form  enctype="multipart/form-data" id="courseForm">
 <div class="row">
     <div class="offset-3 col-sm-6">
 
@@ -27,7 +28,7 @@
     <div class="offset-2 col-sm-3">
         <div class="form-group">
             <label>Course picture</label>
-            <input type="file" id="file">
+            <input type="file" id="file" name="file">
 
         </div>
     </div>
@@ -46,7 +47,8 @@
 
 
 
-<button class="btn btn-secondary" type="submit" onclick="saveCourse()"> Save </button>
+<button class="btn btn-secondary" onclick="saveCourse()"> Save </button>
+</form>
 
 
 <script src="jq.js"></script>
