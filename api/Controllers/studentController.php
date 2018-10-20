@@ -23,7 +23,7 @@ class StudentController{
                 $sourcePath = $_FILES['file']['tmp_name'];
                 $targetPath = "../client/img/".$fileName;
                 if(move_uploaded_file($sourcePath,$targetPath)){
-                    echo "file saved";
+                  
                 }else echo "file was not saved";
             }else{
                 $targetPath = "../client/img/user.jpg";
@@ -51,13 +51,14 @@ class StudentController{
                 $sourcePath = $_FILES['file']['tmp_name'];
                 $targetPath = "../client/img/".$fileName;
                 if(move_uploaded_file($sourcePath,$targetPath)){
-                    echo "file saved";
+                    
                 }else echo "file was not saved";
             }else{
                 $targetPath = "../client/img/user.jpg";
             }
         }
-    $this->model->updateStudent($id,$name,$phone,$email,$arr,$targetPath);
+
+    echo json_encode($this->model->updateStudent($id,$name,$phone,$email,$arr,$targetPath));
      }
               
 }

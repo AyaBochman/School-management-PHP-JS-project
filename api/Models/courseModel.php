@@ -17,13 +17,14 @@ class CourseModel extends Model{
          
     }
 
-    public function updateCourse($id,$courseName,$desc){
+    public function updateCourse($id,$courseName,$desc,$image){
         if(isset($_SESSION['currentUser']) && $_SESSION['role'] != "sales"){
         $q = "UPDATE courses
-        SET name = '$courseName', description = '$desc' where id = '$id' ";
+        SET name = '$courseName', description = '$desc', image = '$image' where id = '$id' ";
         $data = $this->dbc->Prepare($q);
         $data->execute();
     }
+    return $id;
 
 }
 

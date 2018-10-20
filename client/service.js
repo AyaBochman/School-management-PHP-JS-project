@@ -217,8 +217,9 @@ function editCurrent() {
 
 //ADD//UPDATE COURSE TO DB
 function saveCourse() {
+    let form = new FormData($("form")[0]);
     if (status == "add") {
-        let form = new FormData($("form")[0]);
+       
         $.ajax({
             type: "POST",
             url: "http://localhost/school/api/index.php?controller=course&action=add_course",
@@ -227,6 +228,7 @@ function saveCourse() {
             cache: false,
             processData: false,
             success: function (res) {
+                clean();
                 getCurrent(res, "courses");
                 getData();
             }
@@ -234,44 +236,37 @@ function saveCourse() {
       
     }
     if (status == "edit") {
-        var id = cFORM.id.value;
-        var courseName = cFORM.courseName.value;
-        var desc = cFORM.desc.value;
-
-
         $.ajax({
+            type: "POST",
             url: "http://localhost/school/api/index.php?controller=course&action=update_course",
-            method: "POST",
-            data: { id: id, courseName: courseName, desc: desc },
+            data: form,
+            contentType: false,
+            cache: false,
+            processData: false,
             success: function (res) {
                 clean();
-                console.log("course updated");
-                getCurrent(id, "courses");
+                getCurrent(res, "courses");
                 getData();
-            },
-            error: function (res) {
-                console.log(JSON.stringify(res));
             }
-
-        })
+        });
     }
 
 }
 
 function saveStudent() {
-    if (status == "add") {
-        var check = sFORM.checkbox;
-        var myCourses = [];
-        for (i = 0; i < check.length; i++) {
-            if (check[i].checked === true) {
-                console.log(check[i].value);
-                myCourses.push(check[i].value);
-            }
-
+    var check = sFORM.checkbox;
+    var myCourses = [];
+    for (i = 0; i < check.length; i++) {
+        if (check[i].checked === true) {
+            myCourses.push(check[i].value);
         }
-        let form = new FormData($("form")[0]);
-        var json_arr = JSON.stringify(myCourses);
-        form.append('myCourses',json_arr);
+
+    }
+    let form = new FormData($("form")[0]);
+    var json_arr = JSON.stringify(myCourses);
+    form.append('myCourses',json_arr);
+
+    if (status == "add") {
         $.ajax({
             type: "POST",
             url: "http://localhost/school/api/index.php?controller=student&action=add_student",
@@ -281,6 +276,7 @@ function saveStudent() {
             processData: false,
             success: function (res) {
                 clean();
+                console.log(res);
                 getCurrent(res, "students");
                 getData();
             }
@@ -288,20 +284,6 @@ function saveStudent() {
     }
 
     if (status == "edit") {
-        var check = sFORM.checkbox;
-        var myCourses = [];
-        for (i = 0; i < check.length; i++) {
-            if (check[i].checked === true) {
-                console.log(check[i].value);
-                myCourses.push(check[i].value);
-            }
-
-        }
-       
-        let form = new FormData($("form")[0]);
-        var json_arr = JSON.stringify(myCourses);
-        form.append('myCourses',json_arr);
-       
         $.ajax({
             type: "POST",
             url: "http://localhost/school/api/index.php?controller=student&action=update_student",
@@ -311,8 +293,9 @@ function saveStudent() {
             processData: false,
             success: function (res) {
                 clean();
-                // getCurrent(res, "students");
-                // getData();
+                console.log(res);
+                getCurrent(res, "students");
+                getData();
             }
         });
         

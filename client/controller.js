@@ -46,7 +46,7 @@ var sFORM = function () {
 //COURSE FORM
 var cFORM = function () {
     return {
-        id: document.getElementById("courseId"),
+        courseId: document.getElementById("courseId"),
         courseName: document.getElementById("courseName"),
         desc: document.getElementById("desc"),
         imageP: document.getElementById("coursePreview")
@@ -202,7 +202,7 @@ function fillForm(result, param) {
             break;
 
         case "courses":
-
+            cFORM.courseId.value = result[0].id;
             cFORM.courseName.value = result[0].name;
             cFORM.desc.value = result[0].description;
             cFORM.imageP.src = result[0].image;

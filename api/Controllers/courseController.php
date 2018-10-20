@@ -22,7 +22,7 @@ class CourseController{
                         $sourcePath = $_FILES['file']['tmp_name'];
                         $targetPath = "../client/img/".$fileName;
                         if(move_uploaded_file($sourcePath,$targetPath)){
-                            echo "file saved";
+                         
                         }else echo "file was not saved";
                     }else{
                         $targetPath = "../client/img/course.jpg";
@@ -35,7 +35,24 @@ class CourseController{
 
         
      public function update_course(){
-        $this->model->updateCourse($_POST['id'],$_POST['courseName'],$_POST['desc']);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $id = $_POST['courseId'];       
+            $name = $_POST['courseName'];
+            $desc = $_POST['desc'];
+         
+            if(!empty($_FILES['file']['name'])){
+                $fileName = time().'_'.$_FILES['file']['name'];
+                $sourcePath = $_FILES['file']['tmp_name'];
+                $targetPath = "../client/img/".$fileName;
+                if(move_uploaded_file($sourcePath,$targetPath)){
+                  
+                }else echo "file was not saved";
+            }else{
+                $targetPath = "../client/img/course.jpg";
+            }
+        }
+     echo json_encode($this->model->saveCourse($id,$name,$desc,$targetPath));
+        // $this->model->updateCourse($_POST['id'],$_POST['courseName'],$_POST['desc']);
      }
     
  

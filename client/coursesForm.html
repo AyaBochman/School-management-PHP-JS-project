@@ -1,8 +1,9 @@
 <!-- <div class="form-group">
-        <input type="hidden" class="form-control" id="courseId">
+       
     </div> -->
     <form  enctype="multipart/form-data" id="courseForm">
 <div class="row">
+        <input type="hidden" name="courseId" id="courseId">
     <div class="offset-3 col-sm-6">
 
         <div class="form-group">
@@ -47,7 +48,7 @@
 
 
 
-<button class="btn btn-secondary" onclick="saveCourse()"> Save </button>
+<button class="btn btn-secondary" onclick="saveCourse();return false;"> Save </button>
 </form>
 
 
