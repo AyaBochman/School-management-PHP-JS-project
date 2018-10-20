@@ -189,17 +189,19 @@ function delCurrent(id, table) {
 function editCurrent() {
     status = "edit";
     var that = this.parentElement;
-    console.log(that);
+    // console.log(that);
     var id = that.id;
     var table = that.getAttribute("table");
     loadForm(table);
     $.ajax({
-        url: "http://localhost/school/api/index.php?controller=home&action=get_current&" + table + "=students&id=" + id,
+        url: "http://localhost/school/api/index.php?controller=home&action=get_current&table="+ table + "&id=" + id,
         method: "GET",
         data: { id: id, table: table },
         success: function (res) {
             console.log("status changed to: " + status);
+         
             fillForm(JSON.parse(res), table);
+         
         },
         error: function (res) {
             alert(JSON.stringify(res));
@@ -226,25 +228,7 @@ function saveCourse() {
                 getData();
             }
         });
-        // var courseName = cFORM.courseName.value;
-        // var desc = cFORM.desc.value;
-        // // var courseImage = cFORM.email.value;
-
-        // $.ajax({
-        //     url: "http://localhost/school/api/index.php?controller=course&action=add_course",
-        //     method: "POST",
-        //     data: { courseName: courseName, desc: desc },
-        //     success: function (res) {
-        //         clean();
-
-        //         getCurrent(res, "courses");
-        //         getData();
-        //     },
-        //     error: function (res) {
-        //         console.log(JSON.stringify(res));
-        //     }
-
-        // })
+      
     }
     if (status == "edit") {
         var id = cFORM.id.value;

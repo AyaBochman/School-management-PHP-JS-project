@@ -18,7 +18,10 @@ public function getData($table){
    
 
   $data =   $this->dbc->Select("SELECT * FROM ".$table." where id=".$id);
-
+    if($table == "students"){
+      $data1 = $this->dbc->Select("SELECT courseId FROM my_school.student_course WHERE studentId =".$id);
+      array_push($data,$data1);
+    }
    
     return $data;
   }

@@ -21,7 +21,7 @@ class HomeController{
 
     public function get_current(){
         echo json_encode($this->model->getCurrent($_GET["table"],$_GET["id"]));
-        // $this->model->getNames($_GET["table"],$_GET["id"]);
+       
 
     }
 
