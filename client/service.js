@@ -288,27 +288,34 @@ function saveStudent() {
     }
 
     if (status == "edit") {
-        var id = sFORM.id.value;
-        var name = sFORM.name.value;
-        var phone = sFORM.phone.value;
-        var email = sFORM.email.value;
-
-
-        $.ajax({
-            url: "http://localhost/school/api/index.php?controller=student&action=update_student",
-            method: "POST",
-            data: { id: id, name: name, phone: phone, email: email },
-            success: function (res) {
-                clean();
-                console.log("student updated");
-                getCurrent(id, "students");
-                getData();
-            },
-            error: function (res) {
-                console.log(JSON.stringify(res));
+        var check = sFORM.checkbox;
+        var myCourses = [];
+        for (i = 0; i < check.length; i++) {
+            if (check[i].checked === true) {
+                console.log(check[i].value);
+                myCourses.push(check[i].value);
             }
 
-        })
+        }
+       
+        let form = new FormData($("form")[0]);
+        var json_arr = JSON.stringify(myCourses);
+        form.append('myCourses',json_arr);
+       
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/school/api/index.php?controller=student&action=update_student",
+            data: form,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (res) {
+                clean();
+                // getCurrent(res, "students");
+                // getData();
+            }
+        });
+        
     }
 
 }

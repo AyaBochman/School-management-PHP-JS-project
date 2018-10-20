@@ -1,12 +1,12 @@
 
 
-$(document).ready(function () {
+// $(document).ready(function () {
 
-    /*! Fades in page on load */
-    $('body').css('display', 'none');
-    $('body').fadeIn(700);
+//     /*! Fades in page on load */
+//     $('body').css('display', 'none');
+//     $('body').fadeIn(700);
 
-});
+// });
 
 
 var DOM = function () {
@@ -190,7 +190,7 @@ function fillForm(result, param) {
 
     switch (param) {
         case "students":
-            
+            sFORM.id.value = result[0].id;
             sFORM.name.value = result[0].name;
             sFORM.phone.value = result[0].phone;
             sFORM.email.value = result[0].email;
@@ -199,38 +199,6 @@ function fillForm(result, param) {
                 checkarr.push(course.courseId);
 
             });
-            
-            // console.log(courseCheck);
-            // console.log(Object.keys(courseCheck));
-           
-         
-       
-            // var stable = Array.from(sFORM.checkbox);
-            // stable.forEach(element => {
-            //     console.log(element);
-            // });
-            // console.log(sFORM.checkbox);
-            // var c = sFORM.checkbox[0].value;
-            // console.log(c);
-            // for (i = 0; i < checkarr.length; i++) {
-            //    console.log(typeof checkarr[i]);
-
-
-            // }
-            // for(i=0;i<result[1].length;i++){
-            //     console.log(result[1][i].courseId);
-            //     for(i=0; i < sFORM.checkbox.length; i++){
-            //                 if(sFORM.checkbox[i].value == result[1][i].courseId){
-            //                     sFORM.checkbox[i].checked = true;
-            //                 }
-            //             }
-            // }
-
-            // for(result[1])
-            // if(sFORM.checkbox.value == result[1]){
-
-            // }
-
             break;
 
         case "courses":
@@ -382,33 +350,6 @@ function displayName(array) {
 }
 
 
-
-// function chooseCourses() {
-//     $.ajax({
-//         url: "http://localhost/school/api/index.php?controller=home&action=get_courses",
-//         method: "GET",
-//         success: function (res) {
-//             formCourse(JSON.parse(res));
-
-//         },
-//         error: function (res) {
-//             alert(JSON.stringify(res));
-//         }
-
-//     })
-
-// }
-
-
-
-//COURSE DISPLAY FOR STUDENTS FORM
-// function formCourse(course) {
-//     // sFORM.courseChoose.innerHTML = "";
-//     for (i = 0; i < course.length; i++) {
-//         sFORM.courseChoose.appendChild(courseName(course[i]));
-//     }
-
-// }
 var courseCheck = [];
 
 function loadCourses(array) {

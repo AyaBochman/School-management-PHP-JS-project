@@ -29,16 +29,36 @@ class StudentModel extends Model{
     }
 
  
-    // public function studentCourses($selected){
+    
 
-    // }
-
-    public function updateStudent($id,$name,$phone,$email,$image){
-
+    public function updateStudent($id,$name,$phone,$email,$enrolled,$image){
+        //first delete
+        $q = "DELETE FROM student_course WHERE studentId =".$id;
+        $data = $this->dbc->Prepare($q);
+            $data->execute();
+            if($data->affected_rows > 0 ){
+                
         $q = "UPDATE students
         SET name = '$name', phone = '$phone', email = '$email', image= '$image' where id = '$id' ";
         $data = $this->dbc->Prepare($q);
         $data->execute();
+
+      
+            foreach ($enrolled as $course){
+                $q1 = "INSERT INTO student_course (studentId, courseId) VALUES (?, ?)";
+                $stmt = $this->dbc->Prepare($q1);
+                $stmt->bind_param("ii",$id,$course);
+                $stmt->execute();
+            
+        } 
+            }
+            else{
+                return false;
+            }
+
+
+
+        return $id;
     }
 
 
