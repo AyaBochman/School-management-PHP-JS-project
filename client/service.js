@@ -19,6 +19,7 @@ function getData() {
             draw(JSON.parse(res));
             if (document.body.contains(sFORM.courseChoose)) {
                 loadCourses(JSON.parse(res));
+                // console.log(JSON.parse(res)[0]);
             }
 
 
@@ -186,6 +187,8 @@ function delCurrent(id, table) {
 
 
 
+
+
 function editCurrent() {
     status = "edit";
     var that = this.parentElement;
@@ -193,15 +196,15 @@ function editCurrent() {
     var id = that.id;
     var table = that.getAttribute("table");
     loadForm(table);
+ 
     $.ajax({
         url: "http://localhost/school/api/index.php?controller=home&action=get_current&table="+ table + "&id=" + id,
         method: "GET",
         data: { id: id, table: table },
         success: function (res) {
-            console.log("status changed to: " + status);
-         
+        
             fillForm(JSON.parse(res), table);
-         
+            
         },
         error: function (res) {
             alert(JSON.stringify(res));
@@ -289,6 +292,7 @@ function saveStudent() {
         var name = sFORM.name.value;
         var phone = sFORM.phone.value;
         var email = sFORM.email.value;
+
 
         $.ajax({
             url: "http://localhost/school/api/index.php?controller=student&action=update_student",

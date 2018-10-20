@@ -69,6 +69,7 @@ var aFORM = function () {
 function loadForm(param) {
 
     $("#overview").load(param + "Form.html");
+   
 }
 
 
@@ -183,12 +184,13 @@ function studentLi(singleStudent) {
 
 
 
-
+var checkarr = [];
 
 function fillForm(result, param) {
+
     switch (param) {
         case "students":
-            var checkarr = [];
+            
             sFORM.name.value = result[0].name;
             sFORM.phone.value = result[0].phone;
             sFORM.email.value = result[0].email;
@@ -197,8 +199,11 @@ function fillForm(result, param) {
                 checkarr.push(course.courseId);
 
             });
-            console.log(checkarr);
-            console.log(sFORM.checkbox);
+            
+            // console.log(courseCheck);
+            // console.log(Object.keys(courseCheck));
+           
+         
        
             // var stable = Array.from(sFORM.checkbox);
             // stable.forEach(element => {
@@ -235,7 +240,9 @@ function fillForm(result, param) {
             cFORM.imageP.src = result[0].image;
             break;
     }
+    
 }
+
 
 
 
@@ -402,12 +409,25 @@ function displayName(array) {
 //     }
 
 // }
+var courseCheck = [];
 
 function loadCourses(array) {
     for (i = 0; i < array[0].length; i++) {
 
         sFORM.courseChoose.appendChild(courseName(array[0][i]));
+        
     }
+    if(status == "edit"){
+        for (var i = 0; i < courseCheck.length; i++) {
+            for (var j = 0; j < checkarr.length; j++) {
+                if (courseCheck[i].value == checkarr[j]) {
+                 courseCheck[i].checked = true;
+                }
+            }
+        }
+    }
+  
+    
 }
 
 
@@ -416,11 +436,14 @@ function courseName(singleCourse) {
     var checkInp = document.createElement("input");
     checkInp.type = "checkbox";
     checkInp.name = "check_list[]";
+    checkInp.classList.add("checkboxes");
     li.classList.add("choises");
 
     li.innerText = singleCourse.name + " ";
     checkInp.value = singleCourse.id;
     li.appendChild(checkInp);
+    courseCheck.push(checkInp);
+    
     return li;
 }
 
