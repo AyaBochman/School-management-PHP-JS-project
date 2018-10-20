@@ -90,6 +90,7 @@ body{
 
 .adm-image{
     width: 70px;
+    border-radius: 100px;
     height: auto;
     display: inline-block;
     position: absolute;
@@ -111,6 +112,7 @@ width: 30px;
 display: inline-block;
 position: absolute;
 left: 37%;
+border-radius: 100px;
 }
 
 #img{
@@ -142,12 +144,19 @@ left: 37%;
 
 .span-edit{
     left: 10px;
-    color: darkgreen;
+    transition: all 0.3s;
+}
+.span-edit:hover{
+color: darkgreen;
 }
 
 .span-del{
     right: 10px;
-    color: darkred;
+    transition: all 0.3s;
+}
+
+.span-del:hover{
+     color: darkred;
 }
 
 /* ================================================ */
@@ -292,3 +301,4 @@ form{
 }
 
 /* END SCROLLER */
+

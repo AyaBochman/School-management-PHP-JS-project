@@ -273,17 +273,18 @@ function saveCourse() {
 
 function saveStudent() {
     if (status == "add") {
-        // var check = sFORM.checkbox;
-        // // var myCourses = [];
-        // // for (i = 0; i < check.length; i++) {
-        // //     if (check[i].checked === true) {
-        // //         console.log(check[i].value);
-        // //         myCourses.push(check[i].value);
-        // //     }
+        var check = sFORM.checkbox;
+        var myCourses = [];
+        for (i = 0; i < check.length; i++) {
+            if (check[i].checked === true) {
+                console.log(check[i].value);
+                myCourses.push(check[i].value);
+            }
 
-        // // }
+        }
         let form = new FormData($("form")[0]);
-   
+        var json_arr = JSON.stringify(myCourses);
+        form.append('myCourses',json_arr);
         $.ajax({
             type: "POST",
             url: "http://localhost/school/api/index.php?controller=student&action=add_student",
@@ -292,40 +293,12 @@ function saveStudent() {
             cache: false,
             processData: false,
             success: function (res) {
+                clean();
                 getCurrent(res, "students");
                 getData();
             }
         });
     }
-
-    // var name = sFORM.name.value;
-    // var phone = sFORM.phone.value;
-    // var email = sFORM.email.value;
-    // var check = sFORM.checkbox;
-    // var myCourses = [];
-    // for (i = 0; i < check.length; i++) {
-    //     if (check[i].checked === true) {
-    //         console.log(check[i].value);
-    //         myCourses.push(check[i].value);
-    //     }
-
-    // }
-
-    // $.ajax({
-    //     url: "http://localhost/school/api/index.php?controller=student&action=add_student",
-    //     method: "POST",
-    //     data: { name: name, phone: phone, email: email , myCourses: myCourses},
-    //     success: function (res) {
-    //         clean();
-    //         // console.log(res);
-    //         getCurrent(res, "students");
-    //         getData();
-    //     },
-    //     error: function (res) {
-    //         console.log(JSON.stringify(res));
-    //     }
-
-    // })
 
     if (status == "edit") {
         var id = sFORM.id.value;

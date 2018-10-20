@@ -12,12 +12,12 @@ class StudentController{
 
     public function add_student(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        
+                   
             $name = $_POST['name'];
-            $email = $_POST['email'];
             $phone = $_POST['phone'];
-            $enrolled = $_POST['check_list[]'];
-            echo "the post data is: name: $enrolled";
+            $email = $_POST['email'];
+            $arr = json_decode($_POST['myCourses']);
+         
             if(!empty($_FILES['file']['name'])){
                 $fileName = time().'_'.$_FILES['file']['name'];
                 $sourcePath = $_FILES['file']['tmp_name'];
@@ -29,11 +29,9 @@ class StudentController{
                 $targetPath = "../client/img/user.jpg";
             }
         }
-        echo json_encode($this->model->saveStudent($name,$phone,$email,$enrolled,$targetPath));
-     
+     echo json_encode($this->model->saveStudent($name,$phone,$email,$arr,$targetPath));
 
-}
-       
+    }
              
       
         
