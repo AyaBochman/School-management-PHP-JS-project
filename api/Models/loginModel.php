@@ -4,13 +4,7 @@ require_once("Model.php");
 
 class LoginModel extends Model {
 
-    // public function getLogin(){
-    //     if(count($_SESSION['currentUser'] > 0)){
-    //        echo "http://localhost/school/client/index.html";
-    //     } else{
-    //         echo "http://localhost/school/client/login.html";
-    //     }
-    // }
+
 
     public function loginAction($email, $password){
         $q1 = "SELECT password FROM my_school.admins where email = '$email'";

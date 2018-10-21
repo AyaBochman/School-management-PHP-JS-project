@@ -38,9 +38,7 @@ class LoginController{
         if($result){
            
             echo "http://localhost/school/client/index.html";
-            // echo "success";
-    
-           
+            
         }
         else{
            echo "not good";

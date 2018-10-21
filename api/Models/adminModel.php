@@ -49,12 +49,12 @@ return $data;
 
   public function updateAdmin($id,$name,$role,$phone,$email,$password,$image){
     // if(isset($_SESSION['currentUser']) && $_SESSION['role'] != "sales"){
-    if($image != "../client/img/user.jpg"){
+    if($image != "../client/img/user.jpg" && $password != ""){
       $q = "UPDATE admins
       SET name = '$name', role = '$role', phone = '$phone', email = '$email', password = '$password', image = '$image' where id = '$id' ";
     }else{
       $q = "UPDATE admins
-      SET name = '$name', role = '$role', phone = '$phone', email = '$email', password = '$password' where id = '$id' ";
+      SET name = '$name', role = '$role', phone = '$phone', email = '$email' where id = '$id' ";
     }
    
     $data = $this->dbc->Prepare($q);

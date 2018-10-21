@@ -189,7 +189,6 @@ function fillForm(result, param) {
             sFORM.name.value = result[0].name;
             sFORM.phone.value = result[0].phone;
             sFORM.email.value = result[0].email;
-            // $("#file").val(result[0].image);
             sFORM.imageP.src = result[0].image;
             result[1].forEach(course => {
                 checkarr.push(course.courseId);
@@ -210,7 +209,6 @@ function fillForm(result, param) {
             aFORM.adminPhone.value = result[0].phone;
             aFORM.adminEmail.value = result[0].email;
             aFORM.adminRole.value = result[0].role;
-            aFORM.adminPass.value = result[0].password;
             aFORM.imageP.src = result[0].image;
     }
     
