@@ -44,35 +44,6 @@ function displaySelected() {
 
 }
 
-function saveAdmin() {
-    if (status == "add") {
-        var adminName = aFORM.adminName.value;
-        var adminRole = aFORM.adminRole.value;
-        var adminPhone = aFORM.adminPhone.value;
-        var adminEmail = aFORM.adminEmail.value;
-        var adminPass = aFORM.adminPass.value;
-
-
-        $.ajax({
-            url: "http://localhost/school/api/index.php?controller=admin&action=add_admin",
-            method: "POST",
-            data: {
-                adminName: adminName, adminRole: adminRole, adminPhone: adminPhone, adminEmail: adminEmail,
-                adminPass: adminPass
-            },
-            success: function (res) {
-                console.log("added");
-                clean();
-                // getAdmin(JSON.parse(res));
-                // getAdmins();
-            },
-            error: function (res) {
-                console.log(JSON.stringify(res));
-            }
-
-        })
-    }
-}
 
 
 function getCurrent(id, table) {
@@ -303,6 +274,29 @@ function saveStudent() {
 
 }
 
+function saveAdmin() {
+    let form = new FormData($("form")[0]);
+    if (status == "add") {
+       
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/school/api/index.php?controller=admin&action=add_admin",
+            data: form,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (res) {
+                console.log(res);
+                // clean();
+                // getCurrent(res, "courses");
+                // getData();
+            }
+        });
+      
+    }
+}
+
+
 
 //ADMINS
 function getAdmins() {
@@ -331,6 +325,7 @@ function getAdmins() {
     })
 
 }
+
 function displayAdmin() {
     DOM.overview.innerHTML = "";
     var id = this.id;
