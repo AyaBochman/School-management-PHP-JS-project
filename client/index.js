@@ -6,37 +6,39 @@
 // }
 
 
-function logInNow() {
 
-    var email = $("#email").val();
-    var password = $("#password").val();
+// function logInNow() {
 
-    $.ajax({
-        method: "POST",
-        url: "http://localhost/school/api/index.php?controller=login&action=login",
-        data: { email: email, password: password },
-        success: function (response) { 
-            if (response == "invalid") {
+//     var email = $("#email").val();
+//     var password = $("#password").val();
 
-                return false;
-            }else{
-                setTimeout(function(){
-                    localStorage.setItem("currentUser", JSON.stringify(email));
-                    window.location.href = response;
-                },1000)
-            }
-            console.log(response);
-            
+//     $.ajax({
+//         method: "POST",
+//         url: "http://localhost/school/api/index.php?controller=login&action=login",
+//         data: { email: email, password: password },
+//         success: function (response) {
+//             if (response == "invalid") {
+
+//                 // return false;
+//             } else {
+//                 setTimeout(function () {
+//                     localStorage.setItem("currentUser", JSON.stringify(email));
+//                     window.location.href = response;
+//                 }, 1000)
+               
+//             }
+//             // console.log(response);
 
 
-        },
-        error: function (response) {
-            alert("oops");
-        }
 
-    })
+//         },
+//         error: function (response) {
+//             alert("oops");
+//         }
 
-}
+//     })
+
+// }
 
 //LOGIN
 // var working = false;
@@ -47,35 +49,47 @@ $('.login').on('submit', function (e) {
     }
 
     e.preventDefault();
-    // if (working) return;
-    // working = true;
+    var email = $("#email").val();
+    var password = $("#password").val();
     var $this = $(this),
         $state = $this.find('button > .state');
     $this.addClass('loading');
     $state.html('Authenticating');
     setTimeout(function () {
-        setTimeout(function () {
-                 $this.addClass('ok');
-                $state.html('Welcome back!');
-            if (logInNow()) {
-            
-                
-                    logInNow();
-               
-
-            } else {
-                setTimeout(function () {
+        $.ajax({
+            method: "POST",
+            url: "http://localhost/school/api/index.php?controller=login&action=login",
+            data: { email: email, password: password },
+            success: function (response) {
+                if (response !== "http://localhost/school/client/index.html") {
                     $state.html('Log in');
                     $this.removeClass('ok loading');
-                    working = false;
-                }, 4000);
-                $(".error").html('*the username/password is invalid');
+                    $(".error").html('*the username/password is invalid');
+                } else {
+                    $this.addClass('ok');
+                    $state.html('Welcome back!');
+                    setTimeout(function () {
+                        localStorage.setItem("currentUser", JSON.stringify(email));
+                        window.location.href = response;
+                    }, 1000)
+                   
+                }
+                // console.log(response);
+    
+    
+    
+            },
+            error: function (response) {
+                alert("oops");
             }
+    
+        })
+    
 
-        }, 3000);
 
 
-    }, 3000);
+
+    }, 2000);
 
 
 
@@ -83,6 +97,17 @@ $('.login').on('submit', function (e) {
 });
 
 
+//         if (!logInNow()) {
+//           
+
+//         } else {
+//    setTimeout(function () {
+//                 $this.addClass('ok');
+//                 $state.html('Welcome back!');
+//                 logInNow();
+//             }, 500);
+            
+//         }
 
 
 function logout() {
