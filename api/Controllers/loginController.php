@@ -20,7 +20,6 @@ class LoginController{
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if(!isset($_SESSION['currentUser'])){ //if login in session is not set
             echo "unauthorized";
-            // header('Location:http://localhost/school/client/login.html');
           
         }
         else{
