@@ -40,7 +40,7 @@ class LoginController{
             
         }
         else{
-           echo "not good";
+           echo "invalid";
            
         }
 

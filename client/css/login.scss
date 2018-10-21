@@ -3,21 +3,30 @@ $primary: #2196F3;
 body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  background: url("../img/bg.jpg") 50% fixed;
+  background: url("../img/sbg.jpg") 50% fixed;
   background-size: cover;
+  text-align: center;
 }
 
 @keyframes spinner {
   0% { transform: rotateZ(0deg); }
   100% { transform: rotateZ(359deg); }
 }
+img{
+  margin: 15px;
+}
+
+.copy{
+  color: white;
+  letter-spacing: 2px;
+}
 
 * {
   box-sizing: border-box;
 }
 
-#welcomes{
-  color: rgba(255, 255, 255, 0.8);
+.error{
+  color: red;
 }
 
 .wrapper {
@@ -28,7 +37,7 @@ body {
   width: 100%;
   min-height: 100%;
   padding: 20px;
-  background: rgba(darken($primary,40%), 0.85);
+  background: rgba(darken($primary,40%), 0.75);
 }
 
 
@@ -48,6 +57,7 @@ body {
       max-height: 100%;
       padding-top: 50px;
       .spinner {
+     
         opacity: 1;
         top: 40%;
       }

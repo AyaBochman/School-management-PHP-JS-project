@@ -29,10 +29,6 @@ class LoginModel extends Model {
             }
             
             
-        }else {
-          
-             echo 'Invalid password.';
-             
         }
  
         

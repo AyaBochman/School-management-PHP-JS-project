@@ -1,8 +1,9 @@
 body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  background: url("../img/bg.jpg") 50% fixed;
+  background: url("../img/sbg.jpg") 50% fixed;
   background-size: cover;
+  text-align: center;
 }
 
 @-webkit-keyframes spinner {
@@ -27,13 +28,22 @@ body {
   }
 }
 
+img {
+  margin: 15px;
+}
+
+.copy {
+  color: white;
+  letter-spacing: 2px;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-#welcomes {
-  color: rgba(255, 255, 255, 0.8);
+.error {
+  color: red;
 }
 
 .wrapper {
@@ -53,7 +63,7 @@ body {
   width: 100%;
   min-height: 100%;
   padding: 20px;
-  background: rgba(4, 40, 68, 0.85);
+  background: rgba(4, 40, 68, 0.75);
 }
 
 .login {
