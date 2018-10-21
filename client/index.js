@@ -34,10 +34,10 @@ function logInNow() {
 //LOGIN
 var working = false;
 $('.login').on('submit', function(e) {
-    // if ($.trim($("#email").val()) === "" || $.trim($("#password").val()) === "") {
-    //    $('.error').html('*You need to fill all the fields');
-    //     return false;
-    // }
+    if ($.trim($("#email").val()) === "" || $.trim($("#password").val()) === "") {
+       $('.error').html('*You need to fill all the fields');
+        return false;
+    }
   e.preventDefault();
   if (working) return;
   working = true;
