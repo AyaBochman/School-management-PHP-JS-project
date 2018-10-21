@@ -163,7 +163,6 @@ function delCurrent(id, table) {
 function editCurrent() {
     status = "edit";
     var that = this.parentElement;
-    // console.log(that);
     var id = that.id;
     var table = that.getAttribute("table");
     loadForm(table);
@@ -286,13 +285,27 @@ function saveAdmin() {
             cache: false,
             processData: false,
             success: function (res) {
-                console.log(res);
-                // clean();
-                // getCurrent(res, "courses");
-                // getData();
+                clean();
+                getAdmin(res);
+                getAdmins();
             }
         });
       
+    }
+    if(status == "edit"){
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/school/api/index.php?controller=admin&action=update_admin",
+            data: form,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (res) {
+                clean();
+                getAdmin(res);
+                getAdmins();
+            }
+        });
     }
 }
 

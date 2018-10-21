@@ -14,7 +14,6 @@ var DOM = function () {
         main: document.getElementById("main"),
         courses: document.getElementById("courseList"),
         students: document.getElementById("studentList"),
-        admins: document.getElementById("adminList"),
         overview: document.getElementById("overview"),
         leftHead: document.getElementById("leftHead"),
         rightHead: document.getElementById("rightHead"),
@@ -23,6 +22,7 @@ var DOM = function () {
 
     }
 }();
+
 
 function clean() {
     DOM.overview.innerHTML = "";
@@ -54,22 +54,24 @@ var cFORM = function () {
     }
 }();
 
+//ADMIN FORM
 var aFORM = function () {
     return {
+        adminId: document.getElementById("adminId"),
         adminName: document.getElementById("adminName"),
         adminRole: document.getElementById("adminRole"),
         adminPhone: document.getElementById("adminPhone"),
         adminEmail: document.getElementById("adminEmail"),
-        adminPass: document.getElementById("adminPass")
+        adminPass: document.getElementById("adminPass"),
+        imageP: document.getElementById("adminPreview")
 
     }
 }();
 
 
+//LOADING FORM
 function loadForm(param) {
-
     $("#overview").load(param + "Form.html");
-   
 }
 
 
@@ -78,7 +80,6 @@ function addStudentForm() {
     status = "add";
     DOM.overviewHead.innerText = "Add a new Student";
     loadForm("students");
-    // chooseCourses();
 }
 
 //ADD COURSE FORM
@@ -88,18 +89,21 @@ function addCourseForm() {
     loadForm("courses");
 }
 
-
+//ADD ADMIN FORM
 function addAdminForm() {
     status = "add";
     DOM.overviewHead.innerText = "Add a new Admin";
-    console.log("add mode");
     loadForm("admins");
 }
 
+//GLOBAL VARS
 //the status of the form edit/add
 var status;
+var checkarr = []; //the array of checkboxes created on a form
+var courseCheck = []; //the array of the courses every student has -- checked
 
 
+//COURSE & STUDENT LIST DRAW
 function draw(array) {
     if (array !== "") {
         for (i = 0; i < array[0].length; i++) {
@@ -110,21 +114,16 @@ function draw(array) {
 
             DOM.students.appendChild(studentLi(array[1][i]));
         }
-
     }
-
 }
 
-
+//ADMIN LIST DRAW
 function drawAdmins(array) {
     for (let index = 0; index < array.length; index++) {
-
-
         DOM.students.appendChild(adminLi(array[index]));
-
     }
-
 }
+
 
 function adminLi(singleAdmin) {
     var li = document.createElement("li");
@@ -162,8 +161,6 @@ function courseLi(singleCourse) {
 }
 
 
-
-
 function studentLi(singleStudent) {
     var li = document.createElement("li");
     var img = document.createElement("img");
@@ -183,9 +180,7 @@ function studentLi(singleStudent) {
 }
 
 
-
-var checkarr = [];
-
+//FILLING ANY FORM WITH THE DATA
 function fillForm(result, param) {
 
     switch (param) {
@@ -194,6 +189,7 @@ function fillForm(result, param) {
             sFORM.name.value = result[0].name;
             sFORM.phone.value = result[0].phone;
             sFORM.email.value = result[0].email;
+            // $("#file").val(result[0].image);
             sFORM.imageP.src = result[0].image;
             result[1].forEach(course => {
                 checkarr.push(course.courseId);
@@ -207,13 +203,22 @@ function fillForm(result, param) {
             cFORM.desc.value = result[0].description;
             cFORM.imageP.src = result[0].image;
             break;
+        
+        case "admins":
+            aFORM.adminId.value = result[0].id;
+            aFORM.adminName.value = result[0].name;
+            aFORM.adminPhone.value = result[0].phone;
+            aFORM.adminEmail.value = result[0].email;
+            aFORM.adminRole.value = result[0].role;
+            aFORM.adminPass.value = result[0].password;
+            aFORM.imageP.src = result[0].image;
     }
     
 }
 
 
 
-
+//DRAWING STUDENT/COURSE IN THE OVERVIEW
 function drawSelected(p, table) {
 
     DOM.overviewHead.innerText = p[0].name;
@@ -236,11 +241,9 @@ function drawSelected(p, table) {
 
     switch (table) {
         case "students":
-            //  console.log(p[0]);
             card.id = p[0].id;
             card.setAttribute("table", "students");
             card.querySelector("#img").src = p[0].image;
-            // card.querySelector("#theName").innerHTML = p[0].name;
             card.querySelector("#thePhone").innerHTML = "Phone: " + p[0].phone;
             card.querySelector("#theEmail").innerHTML = "Email: " + p[0].email;
             card.appendChild(delBtn);
@@ -254,7 +257,6 @@ function drawSelected(p, table) {
             card.id = p[0].id;
             card.setAttribute("table", "courses");
             card.querySelector("#img").src = p[0].image;
-            // card.querySelector("#theName").innerHTML = p[0].name;
             card.querySelector("#thedesc").innerHTML = "Description" + "<br>" + p[0].description;
             if (userJob != "sales") {
                 card.appendChild(delBtn);
@@ -262,16 +264,13 @@ function drawSelected(p, table) {
             }
 
             break;
-
-
     }
 
     DOM.overview.appendChild(card);
-
-
 }
 
 
+//DRAWING ADMIN IN THE OVERVIEW
 function drawAdmin(admin) {
     DOM.overviewHead.innerText = admin[0].name;
     var card = document.getElementsByName("template")[0].cloneNode(true);
@@ -281,20 +280,17 @@ function drawAdmin(admin) {
     delBtn.classList.add("span-del");
     delBtn.innerHTML = "<i class='fas fa-user-minus fa-2x'></i>";
     delBtn.addEventListener('click', delAdmin);
-
     //edit
     var editBtn = document.createElement("span");
     editBtn.classList.add("span-edit");
     editBtn.innerHTML = "<i class='fas fa-user-edit fa-2x'></i>";
-    // editBtn.addEventListener('click', editAdmin);
+    editBtn.addEventListener('click', editCurrent);
     card.id = admin[0].id;
     card.setAttribute("table", "admins");
     card.querySelector("#img").src = admin[0].image;
     card.querySelector("#theName").innerHTML = "Role: " + admin[0].role;
     card.querySelector("#thePhone").innerHTML = admin[0].phone;
     card.querySelector("#theEmail").innerHTML = admin[0].email;
-
-
 
     card.appendChild(delBtn);
     card.appendChild(editBtn);
@@ -304,7 +300,6 @@ function drawAdmin(admin) {
 }
 
 //SHOW STUDENTS/COURSES ENROLLED TO COURSE
-
 function enrolledNum(number, param) {
 
     var p = document.createElement("h5");
@@ -325,9 +320,7 @@ function enrolledNum(number, param) {
 
 
 //SHOW THE ENROLLED STUDENT/COURSES NAMES
-
 function displayName(array) {
-
     if (array != "") {
         for (i = 0; i < array.length; i++) {
             var div = document.createElement("div");
@@ -340,19 +333,15 @@ function displayName(array) {
             div.appendChild(dimg);
             div.appendChild(dname);
             $("#enrolled").append(div);
-
-
         }
-
     }
 }
 
 
-var courseCheck = [];
 
+//LOADING THE COURSE CHECKBOXES ON EDIT STUDENT FORM
 function loadCourses(array) {
     for (i = 0; i < array[0].length; i++) {
-
         sFORM.courseChoose.appendChild(courseName(array[0][i]));
         
     }
@@ -364,12 +353,10 @@ function loadCourses(array) {
                 }
             }
         }
-    }
-  
-    
+    }   
 }
 
-
+//CREATES THE CHECKBOXES SPANS
 function courseName(singleCourse) {
     var li = document.createElement("span");
     var checkInp = document.createElement("input");
@@ -389,7 +376,7 @@ function courseName(singleCourse) {
 
 
 
-//IMAGE DISPLAY IN FORM
+//IMAGE DISPLAY IN FORM BEFORE UPLOAD
 function readURL(input) {
 
     if (input.files && input.files[0]) {

@@ -19,8 +19,13 @@ class CourseModel extends Model{
 
     public function updateCourse($id,$courseName,$desc,$image){
         if(isset($_SESSION['currentUser']) && $_SESSION['role'] != "sales"){
-        $q = "UPDATE courses
-        SET name = '$courseName', description = '$desc', image = '$image' where id = '$id' ";
+            if($image != "../client/img/course.jpg"){
+             $q = "UPDATE courses
+             SET name = '$courseName', description = '$desc', image = '$image' where id = '$id' ";
+            }else{
+                $q = "UPDATE courses
+                SET name = '$courseName', description = '$desc' where id = '$id' ";        
+            }
         $data = $this->dbc->Prepare($q);
         $data->execute();
     }

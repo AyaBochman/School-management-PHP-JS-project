@@ -54,9 +54,36 @@ class AdminController{
         }
  
        
-        echo json_encode($this->model->addAdmin($name,$role,$phone, $email,$password,$targetPath));
+        echo json_encode($this->model->addAdmin($name,$role,$phone,$email,$password,$targetPath));
     }
    
+
+    public function update_admin(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $psswd = $_POST['adminPass'];
+            $password = PASSWORD_HASH($psswd, PASSWORD_DEFAULT);
+            $id = $_POST['adminId'];
+            $name = $_POST['adminName'];
+            $role = $_POST['adminRole'];
+            $phone = $_POST['adminPhone'];
+            $email = $_POST['adminEmail'];
+            
+         
+            if(!empty($_FILES['file']['name'])){
+                $fileName = time().'_'.$_FILES['file']['name'];
+                $sourcePath = $_FILES['file']['tmp_name'];
+                $targetPath = "../client/img/".$fileName;
+                if(move_uploaded_file($sourcePath,$targetPath)){
+                    
+                }else echo "file was not saved";
+            }else{
+                $targetPath = "../client/img/user.jpg";
+            }
+        }
+
+    echo json_encode($this->model->updateAdmin($id,$name,$role,$phone,$email,$password,$targetPath));
+     }
+    
   
 }
 

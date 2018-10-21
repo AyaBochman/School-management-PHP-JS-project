@@ -37,8 +37,13 @@ class StudentModel extends Model{
         $data = $this->dbc->Prepare($q);
         $data->execute();
 
+        if($image != "../client/img/user.jpg"){
         $q1 = "UPDATE students
         SET name = '$name', phone = '$phone', email = '$email', image= '$image' where id = '$id' ";
+        }else{
+        $q1 = "UPDATE students
+        SET name = '$name', phone = '$phone', email = '$email' where id = '$id' ";
+        }
         $data = $this->dbc->Prepare($q1);
         $data->execute();
 
