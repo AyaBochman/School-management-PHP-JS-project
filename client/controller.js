@@ -222,14 +222,14 @@ function drawSelected(p, table) {
     card.style.display = "inline-block";
     //delete
     var delBtn = document.createElement("span");
-    // delBtn.classList.add("btn");
+    
     delBtn.classList.add("span-del");
     delBtn.innerHTML = "<i class='fas fa-user-minus fa-2x'></i>";
     delBtn.addEventListener('click', delCurrent);
 
     //edit
     var editBtn = document.createElement("span");
-    // editBtn.classList.add("btn");
+
     editBtn.classList.add("span-edit");
     editBtn.innerHTML = "<i class='fas fa-user-edit fa-2x'></i>";
     editBtn.addEventListener('click', editCurrent);
@@ -277,18 +277,16 @@ function drawAdmin(admin) {
     var card = document.getElementsByName("template")[0].cloneNode(true);
     card.style.display = "inline-block";
     //delete
-    var delBtn = document.createElement("button");
-    delBtn.classList.add("btn");
-    delBtn.classList.add("btn-danger");
-    delBtn.innerText = "Delete";
+    var delBtn = document.createElement("span");
+    delBtn.classList.add("span-del");
+    delBtn.innerHTML = "<i class='fas fa-user-minus fa-2x'></i>";
     delBtn.addEventListener('click', delAdmin);
 
     //edit
-    var editBtn = document.createElement("button");
-    editBtn.classList.add("btn");
-    editBtn.classList.add("btn-success");
-    editBtn.innerText = "Edit";
-    //    editBtn.addEventListener('click', editAdmin);
+    var editBtn = document.createElement("span");
+    editBtn.classList.add("span-edit");
+    editBtn.innerHTML = "<i class='fas fa-user-edit fa-2x'></i>";
+    // editBtn.addEventListener('click', editAdmin);
     card.id = admin[0].id;
     card.setAttribute("table", "admins");
     card.querySelector("#img").src = admin[0].image;

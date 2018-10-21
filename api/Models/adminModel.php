@@ -38,10 +38,10 @@ return $data;
     }
   }
   
-  public function addAdmin($name,$role,$phone,$email,$password){
-    $q = "INSERT INTO admins (name,role,phone,email,password) VALUES (?, ?, ?, ?, ?)";
+  public function addAdmin($name,$role,$phone,$email,$password,$image){
+    $q = "INSERT INTO admins (name,role,phone,email,password,image) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $this->dbc->Prepare($q);
-    $stmt->bind_param("siiss",$name,$role,$phone,$email,$password);
+    $stmt->bind_param("siisss",$name,$role,$phone,$email,$password,$image);
     $stmt->execute();
     return $stmt->insert_id;
   }

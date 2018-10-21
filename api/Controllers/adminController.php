@@ -30,21 +30,33 @@ class AdminController{
 
 
     public function add_admin(){
-        $psswd = $_POST['adminPass'];
-        $password = PASSWORD_HASH($psswd, PASSWORD_DEFAULT);
-        echo json_encode($this->model->addAdmin($_POST['adminName'],$_POST['adminRole'],$_POST['adminPhone'],$_POST['adminEmail'], $password));
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $psswd = $_POST['adminPass'];
+            $password = PASSWORD_HASH($psswd, PASSWORD_DEFAULT);
+
+            $name = $_POST['adminName'];
+            $role = $_POST['adminRole'];
+            $phone = $_POST['adminPhone'];
+            $email = $_POST['adminEmail'];
+           
+
+         
+            if(!empty($_FILES['file']['name'])){
+                $fileName = time().'_'.$_FILES['file']['name'];
+                $sourcePath = $_FILES['file']['tmp_name'];
+                $targetPath = "../client/img/".$fileName;
+                if(move_uploaded_file($sourcePath,$targetPath)){
+                  
+                }else echo "file was not saved";
+            }else{
+                $targetPath = "../client/img/user.jpg";
+            }
+        }
+ 
+       
+        echo json_encode($this->model->addAdmin($name,$role,$phone, $email,$password,$targetPath));
     }
-    // public function get_current(){
-    //     echo json_encode($this->model->getCurrent($_GET["table"],$_GET["id"]));
-    //     // $this->model->getNames($_GET["table"],$_GET["id"]);
-
-    // }
-
-    // public function del_current(){
-    //     echo json_encode($this->model->delCurrent($_POST["table"],$_POST["id"]));
-    //     $this->model->deleteEnrolled($_POST["table"],$_POST['id']);
-    // }
-
+   
   
 }
 
