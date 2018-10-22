@@ -22,26 +22,20 @@ $('.login').on('submit', function (e) {
             url: "http://localhost/school/api/index.php?controller=login&action=login",
             data: { email: email, password: password },
             success: function (response) {
-                if (response !== "http://localhost/school/client/index.html") {
-                    clearLogin();
-                    $(".error").html('*the username/password is invalid');
-                    $state.html('Log in');
-                    $this.removeClass('ok loading');
-                   
-
-                } else {
+                
                     $this.addClass('ok');
                     $state.html('Welcome back!');
                     setTimeout(function () {
                         localStorage.setItem("currentUser", JSON.stringify(email));
                         window.location.href = response;
-                    }, 500)
-                   
-                }
+                    }, 500);
     
             },
             error: function (response) {
-                alert("oops");
+                clearLogin();
+                    $(".error").html('*the username/password is invalid');
+                    $state.html('Log in');
+                    $this.removeClass('ok loading');
             }
     
         })

@@ -57,7 +57,7 @@ function getCurrent(id, table) {
 
             drawSelected(JSON.parse(res), table);
             getEnrolled(id, table);
-            getNames(id, table);
+            // getNames(id, table);
 
         },
         error: function (res) {
@@ -68,39 +68,37 @@ function getCurrent(id, table) {
 
 }
 
-//GET ENROLLED
+//GET ENROLLED NUM AND NAMES
 function getEnrolled(id, param) {
     $.ajax({
         url: "http://localhost/school/api/index.php?controller=home&action=get_enrolled_" + param,
         method: "GET",
         data: { id: id },
         success: function (res) {
-            // console.log(res);
             enrolledNum(JSON.parse(res), param);
         },
-        error: function (res) {
-            alert(JSON.stringify(res));
-        }
-
-    })
-}
-
-
-//GET NAMES
-function getNames(id, param) {
-    $.ajax({
-        url: "http://localhost/school/api/index.php?controller=home&action=get_" + param + "_names",
-        method: "GET",
-        data: { id: id },
-        success: function (res) {
-            displayName(JSON.parse(res));
-
+          //names of enrolled
+        complete:function(){
+            $.ajax({
+                url: "http://localhost/school/api/index.php?controller=home&action=get_" + param + "_names",
+                method: "GET",
+                data: { id: id },
+                success: function (res) {
+                    displayName(JSON.parse(res));
+        
+                },
+                error: function (res) {
+                    alert(JSON.stringify(res));
+                }
+        
+            })
         },
         error: function (res) {
             alert(JSON.stringify(res));
         }
 
     })
+  
 }
 
 
@@ -108,9 +106,6 @@ function delCurrent(id, table) {
     var that = this.parentElement;
     var id = that.id;
     var table = that.getAttribute("table");
-    // console.log(id);
-    // console.log(table);
-
     $('#myModal').modal('show');
     $('.delete-confirm').click(function () {
 

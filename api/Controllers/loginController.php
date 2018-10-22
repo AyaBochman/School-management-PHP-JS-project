@@ -40,7 +40,8 @@ class LoginController{
             
         }
         else{
-           echo "invalid";
+            var_dump(http_response_code(401));
+
            
         }
 
