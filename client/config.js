@@ -20,10 +20,11 @@ function checkLogin(){
       
        }
        else{
-     
+        console.log(response);
         console.log("checkLogin");
         console.log("you are logged in as " + response);
         $("#hello-user").html("Welcome!"+"<br>"+JSON.parse(response));
+        // $("#hello-img").src = 
         getData();
         userJob = JSON.parse(response)[1];
         if(userJob == "sales"){

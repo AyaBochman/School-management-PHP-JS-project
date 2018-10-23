@@ -22,34 +22,33 @@ $('.login').on('submit', function (e) {
             url: "http://localhost/school/api/index.php?controller=login&action=login",
             data: { email: email, password: password },
             success: function (response) {
-                
-                    $this.addClass('ok');
-                    $state.html('Welcome back!');
-                    setTimeout(function () {
-                        localStorage.setItem("currentUser", JSON.stringify(email));
-                        window.location.href = response;
-                    }, 500);
-    
+
+                $this.addClass('ok');
+                $state.html('Welcome back!');
+                setTimeout(function () {
+                    localStorage.setItem("currentUser", JSON.stringify(email));
+                    window.location.href = response;
+                }, 500);
+
             },
-            error: function (response) {
+            error: function (error) {
                 clearLogin();
-                    $(".error").html('*the username/password is invalid');
-                    $state.html('Log in');
-                    $this.removeClass('ok loading');
+                $(".error").html('*the username/password is invalid');
+                $state.html('Log in');
+                $this.removeClass('ok loading');
             }
-    
+
         })
 
     }, 2000);
 
-
 });
 
 
-function clearLogin(){
+function clearLogin() {
     $('#email').val('');
     $("#password").val('');
-    
+
 }
 
 function logout() {
@@ -63,8 +62,8 @@ function logout() {
 
 
         },
-        error: function (response) {
-            alert("oops");
+        error: function (error) {
+            alert(error);
         }
 
     })

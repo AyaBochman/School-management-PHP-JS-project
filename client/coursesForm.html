@@ -1,44 +1,43 @@
-<!-- <div class="form-group">
-       
-    </div> -->
-    <form  enctype="multipart/form-data" id="courseForm">
-<div class="row">
+<form enctype="multipart/form-data" id="courseForm">
+    <div class="row">
         <input type="hidden" name="courseId" id="courseId">
-    <div class="offset-3 col-sm-6">
+        <div class="offset-3 col-sm-6">
 
-        <div class="form-group">
+            <div class="form-group">
 
-            <label>Course Name</label>
-            <input type="text" class="form-control" id="courseName" name="courseName" placeholder="Enter course name">
+                <label>Course Name</label>
+                <input type="text" class="form-control" id="courseName" name="courseName" placeholder="Enter course name" required>
+            </div>
+
         </div>
 
     </div>
 
-</div>
-
-<div class="row">
-    <div class="offset-2 col-sm-8">
-        <div class="form-group">
-            <label>Description</label><br>
-            <textarea class="form-control" name="desc" id="desc" cols="35" rows="5"></textarea>
+    <div class="row">
+        <div class="offset-2 col-sm-8">
+            <div class="form-group">
+                <label>Description</label><br>
+                <textarea placeholder="Describe what this course is about" class="form-control" name="desc" id="desc" cols="35" rows="5" required></textarea>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="offset-2 col-sm-3">
-        <div class="form-group">
-            <label>Course picture</label>
-            <input type="file" id="file" name="file">
+    <div class="row">
+        <div class="offset-2 col-sm-3">
+            <div class="form-group">
+                <label class="inputfilec">Choose Picture
+                    <input type="file" id="file" name="file">
+                </label>
 
+
+            </div>
         </div>
-    </div>
-    <div class="offset-2 col-sm-3">
-        <div class="form-group">
+        <div class="offset-1 col-sm-3">
+            <div class="form-group">
                 <img class="imgPreview" src="img/course.jpg" alt="your image" id="coursePreview">
+            </div>
         </div>
     </div>
-</div>
 
 
 
@@ -48,7 +47,7 @@
 
 
 
-<button class="btn btn-secondary" onclick="saveCourse();return false;"> Save </button>
+    <button class="btn btn-secondary" onclick="saveCourse();return false;"> Save </button>
 </form>
 
 

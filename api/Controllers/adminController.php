@@ -62,6 +62,7 @@ class AdminController{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $psswd = $_POST['adminPass'];
             $password = PASSWORD_HASH($psswd, PASSWORD_DEFAULT);
+            
             $id = $_POST['adminId'];
             $name = $_POST['adminName'];
             $role = $_POST['adminRole'];

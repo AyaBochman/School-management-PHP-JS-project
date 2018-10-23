@@ -24,6 +24,11 @@ body{
 
 .nav-link{
     color: white;
+    transition: all 0.5s;
+}
+
+.nav-link:hover{
+    color: rgb(0, 207, 243);
 }
 
 .nav{
@@ -35,6 +40,15 @@ body{
 #hello-user{
     position: absolute;
     right: 12%;
+}
+
+#hello-img{
+position: absolute;
+width: 40px;
+height: auto;
+right: 16%;
+top: 5px;
+border-radius: 100px;
 }
 
 .links{
@@ -79,6 +93,7 @@ body{
     overflow:hidden; 
     overflow-y:auto;
     height:380px;
+    cursor: pointer;
 }
 
 .li-image{
@@ -169,14 +184,51 @@ form{
    
 }
 
+#courseForm{
+    width: 95%;
+}
+#studentForm{
+    width: 80%;
+}
+#adminForm{
+    width: 90%;
+}
+
+.inputfile{
+   background: #0ae;
+   padding: 10px;
+   margin-top: 25px;
+   width: 90%;
+   color: white;
+   border-radius: 100px;
+   cursor: pointer;
+}
+
+.inputfilec{
+    background: #0ae;
+    padding: 10px;
+    margin-top: 25px;
+    width: 180px;
+    color: white;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none;
+}
+.btn-secondary{
+margin: 0 auto;
+}
+
 .form-group{
     text-align: center;
 
 }
 
  .imgPreview{
-    border-radius: 50px;
-    width: 100px;
+    border-radius: 100px;
+    width: 140px;
     height: auto;
 }
 
@@ -195,7 +247,6 @@ form{
 }
 
 /* ================================================ */
-
 
 
 

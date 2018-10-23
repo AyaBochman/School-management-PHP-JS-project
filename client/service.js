@@ -53,12 +53,8 @@ function getCurrent(id, table) {
         method: "GET",
         data: { id: id, table: table },
         success: function (res) {
-            // console.log(JSON.parse(res));
-
             drawSelected(JSON.parse(res), table);
             getEnrolled(id, table);
-            // getNames(id, table);
-
         },
         error: function (res) {
             console.log(JSON.stringify(res));
