@@ -19,13 +19,14 @@ class LoginController{
     public function login(){
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if(!isset($_SESSION['currentUser'])){ //if login in session is not set
-            echo "unauthorized";
+            var_dump(http_response_code(401));
           
         }
         else{
             $theuser = array();
             $_SESSION['role'] = $_SESSION['currentUser']->role_name;
-            array_push($theuser,$_SESSION['currentUser']->name,$_SESSION['role']);
+            $_SESSION['img'] = $_SESSION['currentUser']->image;
+            array_push($theuser,$_SESSION['currentUser']->name,$_SESSION['role'], $_SESSION['img']);
             echo json_encode($theuser);
        
     

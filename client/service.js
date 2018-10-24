@@ -12,8 +12,8 @@ function getData() {
         url: "http://localhost/school/api/index.php?controller=home&action=get_data",
         method: "GET",
         success: function (res) {
-            DOM.leftHead.innerHTML = "Courses <button class='btn btn-primary' id='addCourseBtn' onclick='addCourseForm()'><i class='fa fa-plus-circle'></i></button>";
-            DOM.rightHead.innerHTML = "Students <button class='btn btn-primary' id='addStudentBtn' onclick='addStudentForm()'><i class='fa fa-plus-circle'></i></button>"
+            DOM.leftHead.innerHTML = "Courses <span class='add-btn' id='addCourseBtn' onclick='addCourseForm()'><i class='fa fa-plus-circle'></i></span>";
+            DOM.rightHead.innerHTML = "Students <span class='add-btn' id='addStudentBtn' onclick='addStudentForm()'><i class='fa fa-plus-circle'></i></span>"
             DOM.students.innerHTML = "";
             DOM.courses.innerHTML = "";
             draw(JSON.parse(res));
@@ -215,6 +215,10 @@ function saveCourse() {
 }
 
 function saveStudent() {
+    $(":input").each(function() {
+        if($(this).val() === "")
+         alert("Empty Fields!!");
+     });
     var check = sFORM.checkbox;
     var myCourses = [];
     for (i = 0; i < check.length; i++) {
@@ -313,7 +317,7 @@ function getAdmins() {
         method: "GET",
         success: function (res) {
 
-            DOM.rightHead.innerHTML = "Admins <button class='btn btn-primary' onclick='addAdminForm()'><i class='fa fa-plus-circle'></i></button>";
+            DOM.rightHead.innerHTML = "Admins <span class='add-btn' onclick='addAdminForm()'><i class='fa fa-plus-circle'></i></span>";
 
             DOM.courses.innerHTML = "";
 

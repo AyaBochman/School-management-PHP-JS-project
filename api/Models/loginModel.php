@@ -14,7 +14,7 @@ class LoginModel extends Model {
         
 
         if (password_verify($password, $psswrd)) {
-            $q = "SELECT admins.name,roles.role_name FROM admins 
+            $q = "SELECT admins.name,roles.role_name,admins.image FROM admins 
             left join roles on admins.role = roles.id WHERE email = '$email'";
 
             $loggedInUser = $this->dbc->Select($q);
