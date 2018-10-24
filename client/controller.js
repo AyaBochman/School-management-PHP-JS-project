@@ -270,6 +270,12 @@ function drawSelected(p, table) {
 
 //DRAWING ADMIN IN THE OVERVIEW
 function drawAdmin(admin) {
+    if(admin == false){
+        DOM.overviewHead.innerText = "Overview";
+        DOM.overview.innerText = "Sorry, you can't view this content";
+        return;
+    }
+    
     DOM.overviewHead.innerText = admin[0].name;
     var card = document.getElementsByName("template")[0].cloneNode(true);
     card.style.display = "inline-block";
@@ -290,11 +296,14 @@ function drawAdmin(admin) {
     card.querySelector("#thePhone").innerHTML = admin[0].phone;
     card.querySelector("#theEmail").innerHTML = admin[0].email;
 
-    card.appendChild(delBtn);
+    if(userJob == "manager" && admin[0].id != userId){
+        card.appendChild(delBtn);
+    }
+    
     card.appendChild(editBtn);
 
     DOM.overview.appendChild(card);
-
+    
 }
 
 //SHOW STUDENTS/COURSES ENROLLED TO COURSE

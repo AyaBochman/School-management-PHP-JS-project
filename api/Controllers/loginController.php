@@ -10,11 +10,6 @@ class LoginController{
          $this->model = new LoginModel();
     }
 
-    // public function index(){
-    //     if(isset($_SESSION['currentUser'])){
-    //         echo json_encode($_SESSION['currentUser']);
-    //     }
-    // }
 
     public function login(){
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -26,7 +21,8 @@ class LoginController{
             $theuser = array();
             $_SESSION['role'] = $_SESSION['currentUser']->role_name;
             $_SESSION['img'] = $_SESSION['currentUser']->image;
-            array_push($theuser,$_SESSION['currentUser']->name,$_SESSION['role'], $_SESSION['img']);
+            $_SESSION['userId'] = $_SESSION['currentUser']->id;
+            array_push($theuser,$_SESSION['currentUser']->name,$_SESSION['role'], $_SESSION['img'],$_SESSION['userId']);
             echo json_encode($theuser);
        
     

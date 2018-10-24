@@ -178,6 +178,11 @@ function editCurrent() {
 
 //ADD//UPDATE COURSE TO DB
 function saveCourse() {
+    if ($.trim($("#courseName").val()) === "" || $.trim($("#desc").val()) === "") {
+        $('.ferror').html('*You need to fill name and description');
+        return false;
+    }
+
     let form = new FormData($("form")[0]);
     if (status == "add") {
        
@@ -215,63 +220,71 @@ function saveCourse() {
 }
 
 function saveStudent() {
-    $(":input").each(function() {
-        if($(this).val() === "")
-         alert("Empty Fields!!");
-     });
-    var check = sFORM.checkbox;
-    var myCourses = [];
-    for (i = 0; i < check.length; i++) {
-        if (check[i].checked === true) {
-            myCourses.push(check[i].value);
+    if ($.trim($("#name").val()) === "" || $.trim($("#phone").val()) === "" || $.trim($("#email").val()) === "") {
+        $('.ferror').html('*You need to fill name/email/password');
+        return false;
+    }
+
+        var check = sFORM.checkbox;
+        var myCourses = [];
+        for (i = 0; i < check.length; i++) {
+            if (check[i].checked === true) {
+                myCourses.push(check[i].value);
+            }
+    
         }
-
-    }
-    let form = new FormData($("form")[0]);
-    var json_arr = JSON.stringify(myCourses);
-    form.append('myCourses',json_arr);
-
-    if (status == "add") {
-        $.ajax({
-            type: "POST",
-            url: "http://localhost/school/api/index.php?controller=student&action=add_student",
-            data: form,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function (res) {
-                clean();
-                console.log(res);
-                getCurrent(res, "students");
-                getData();
-            }
-        });
-    }
-
-    if (status == "edit") {
-        $.ajax({
-            type: "POST",
-            url: "http://localhost/school/api/index.php?controller=student&action=update_student",
-            data: form,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function (res) {
-                clean();
-                console.log(res);
-                getCurrent(res, "students");
-                getData();
-            }
-        });
-        
-    }
+        let form = new FormData($("form")[0]);
+        var json_arr = JSON.stringify(myCourses);
+        form.append('myCourses',json_arr);
+    
+        if (status == "add") {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/school/api/index.php?controller=student&action=add_student",
+                data: form,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (res) {
+                    clean();
+                    console.log(res);
+                    getCurrent(res, "students");
+                    getData();
+                }
+            });
+        }
+    
+        if (status == "edit") {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/school/api/index.php?controller=student&action=update_student",
+                data: form,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (res) {
+                    clean();
+                    console.log(res);
+                    getCurrent(res, "students");
+                    getData();
+                }
+            });
+            
+        }
+    
 
 }
 
 function saveAdmin() {
+  
+
     let form = new FormData($("form")[0]);
     if (status == "add") {
-       
+        if ($.trim($("#adminName").val()) === "" || $.trim($("#adminPhone").val()) === "" || $.trim($("#adminEmail").val()) === ""
+        || $.trim($("#adminRole").val()) === "" || $.trim($("#adminPass").val()) === "") {
+            $('.ferror').html('*You need to fill all the fields');
+            return false;
+        }
         $.ajax({
             type: "POST",
             url: "http://localhost/school/api/index.php?controller=admin&action=add_admin",
@@ -288,6 +301,11 @@ function saveAdmin() {
       
     }
     if(status == "edit"){
+        if ($.trim($("#adminName").val()) === "" || $.trim($("#adminPhone").val()) === "" || $.trim($("#adminEmail").val()) === ""
+        || $.trim($("#adminRole").val()) === "") {
+            $('.ferror').html('*You need to fill all the fields');
+            return false;
+        }
         $.ajax({
             type: "POST",
             url: "http://localhost/school/api/index.php?controller=admin&action=update_admin",
@@ -378,7 +396,6 @@ function delAdmin() {
                 $('.success-message').html('deleted successfully!');
                 that.remove();
                 clean();
-                console.log("removed");
                 getAdmins();
 
 
