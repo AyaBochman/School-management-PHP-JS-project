@@ -60,6 +60,7 @@ class AdminController{
 
     public function update_admin(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            
             $psswd = $_POST['adminPass'];
             $password = PASSWORD_HASH($psswd, PASSWORD_DEFAULT);
             
