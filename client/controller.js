@@ -293,8 +293,8 @@ function drawAdmin(admin) {
     card.setAttribute("table", "admins");
     card.querySelector("#img").src = admin[0].image;
     card.querySelector("#theName").innerHTML = "Role: " + admin[0].role;
-    card.querySelector("#thePhone").innerHTML = admin[0].phone;
-    card.querySelector("#theEmail").innerHTML = admin[0].email;
+    card.querySelector("#thePhone").innerHTML = "Phone: "+admin[0].phone;
+    card.querySelector("#theEmail").innerHTML = "Email: "+admin[0].email;
 
     if(userJob == "manager" && admin[0].id == userId){
         card.appendChild(editBtn);
