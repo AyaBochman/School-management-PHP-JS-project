@@ -296,11 +296,13 @@ function drawAdmin(admin) {
     card.querySelector("#thePhone").innerHTML = admin[0].phone;
     card.querySelector("#theEmail").innerHTML = admin[0].email;
 
-    if(userJob == "manager" && admin[0].id != userId){
+    if(userJob == "manager" && admin[0].id == userId){
+        card.appendChild(editBtn);
+    }else{
         card.appendChild(delBtn);
+        card.appendChild(editBtn);
     }
-    
-    card.appendChild(editBtn);
+   
 
     DOM.overview.appendChild(card);
     

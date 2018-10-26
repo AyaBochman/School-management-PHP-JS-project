@@ -70,10 +70,12 @@ return $data;
     
     if($image != "../client/img/user.jpg"){
       $q = "UPDATE admins
-      SET name = '$name', role = '$role', phone = '$phone', email = '$email', image = '$image' where id = '$id' ";
+      SET name = '$name', role = '$role', phone = '$phone', email = '$email', image = '$image' 
+      where id = '$id' ";
     }else{
       $q = "UPDATE admins
-      SET name = '$name', role = '$role', phone = '$phone', email = '$email' where id = '$id' ";
+      SET name = '$name', role = '$role', phone = '$phone', email = '$email' 
+      where id = '$id' ";
     }
    
     $data = $this->dbc->Prepare($q);
