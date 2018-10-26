@@ -61,7 +61,7 @@ return $data;
 
   public function updateAdmin($id,$name,$role,$phone,$email,$password,$image){
     if(isset($_SESSION['currentUser']) && $_SESSION['role'] != "sales"){
-    if($password != ""){
+    if(!empty($password)){
       $q1 = "UPDATE admins
       SET password = '$password' where id = '$id' ";
     }
