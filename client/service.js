@@ -365,7 +365,8 @@ function getAdmin(id) {
         method: "GET",
         data: { id: id },
         success: function (res) {
-
+            console.log(res);
+            // console.log(JSON.parse(res));
             drawAdmin(JSON.parse(res));
 
         },

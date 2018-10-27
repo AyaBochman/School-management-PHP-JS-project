@@ -15,8 +15,7 @@ function checkLogin(){
         method: "GET",
         url: "http://localhost/school/api/index.php?controller=login&action=login",
         success: function (response) {
-        console.log(JSON.parse(response));
-        console.log("checkLogin");
+    
         console.log("you are logged in as " + JSON.parse(response)[0]);
         $("#hello-user").html("<img id='hello-img' src='"+JSON.parse(response)[2]+"'>"+"Welcome!"+"<br>"+JSON.parse(response)[0]+", "+ JSON.parse(response)[1]);
         getData();

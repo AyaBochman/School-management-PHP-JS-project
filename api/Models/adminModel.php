@@ -17,14 +17,19 @@ class AdminModel extends Model{
   public function getCurrAdmin($id){
     if(isset($_SESSION['currentUser']) && $_SESSION['role'] != "sales") {
 
+   
     $data = $this->dbc->Select("SELECT admins.id,name,phone,email,image,roles.role_name as role FROM admins 
     inner join roles on admins.role = roles.id WHERE admins.id =".$id);
-if($data[0]->role == "owner" && $_SESSION['role'] == "manager"){
-  return false;
+if($data[0]->role == "owner" && $_SESSION['role'] != "owner"){
+ 
+    return false;
+  }
+  return $data;
+  
 }
 
-return $data;
-    }
+
+    
   }
 
   public function delAdmin($id){
@@ -77,9 +82,8 @@ return $data;
     $data2->execute();
     }
  
-    if($_SESSION['role'] == "manager" && $_SESSION['currentUser']->id == $id){
-     
-  
+    if($_SESSION['role'] == "manager" && $role != 1){
+      if($_SESSION['currentUser']->id == $id){
         $q = "UPDATE admins SET name = '$name', phone = '$phone', email = '$email' 
         where id = '$id' ";
       }else{
@@ -87,15 +91,28 @@ return $data;
         SET name = '$name', role = '$role', phone = '$phone', email = '$email' 
         where id = '$id' ";
       }
-    
-    
-   
+      
     $data = $this->dbc->Prepare($q);
     $data->execute();
 
-return $id;
-  }
+    return $id;
+    }
 
+    // if($_SESSION['role'] == "manager" && $id == $_SESSION['currentUser']->id){
+     
+  
+    //     $q = "UPDATE admins SET name = '$name', phone = '$phone', email = '$email' 
+    //     where id = '$id' ";
+    //   }else{
+    //     $q = "UPDATE admins
+    //     SET name = '$name', role = '$role', phone = '$phone', email = '$email' 
+    //     where id = '$id' ";
+    //   }
+    
+    
+   
+  }
+  
 }
 
 
