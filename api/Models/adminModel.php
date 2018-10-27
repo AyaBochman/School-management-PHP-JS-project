@@ -69,17 +69,26 @@ return $data;
     $data1 = $this->dbc->Prepare($q1);
     $data1->execute();
     }
- 
 
     if($image != "../client/img/user.jpg"){
-      $q = "UPDATE admins
-      SET name = '$name', role = '$role', phone = '$phone', email = '$email', image = '$image' 
-      where id = '$id' ";
-    }else{
-      $q = "UPDATE admins
-      SET name = '$name', role = '$role', phone = '$phone', email = '$email' 
-      where id = '$id' ";
+    $q2 = "UPDATE admins
+    SET image = '$image' where id = '$id' ";
+    $data2 = $this->dbc->Prepare($q2);
+    $data2->execute();
     }
+ 
+    if($_SESSION['role'] == "manager" && $_SESSION['currentUser']->id == $id){
+     
+  
+        $q = "UPDATE admins SET name = '$name', phone = '$phone', email = '$email' 
+        where id = '$id' ";
+      }else{
+        $q = "UPDATE admins
+        SET name = '$name', role = '$role', phone = '$phone', email = '$email' 
+        where id = '$id' ";
+      }
+    
+    
    
     $data = $this->dbc->Prepare($q);
     $data->execute();
