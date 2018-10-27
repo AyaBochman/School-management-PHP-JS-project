@@ -1,14 +1,5 @@
 
 
-// $(document).ready(function () {
-
-//     /*! Fades in page on load */
-//     $('body').css('display', 'none');
-//     $('body').fadeIn(700);
-
-// });
-
-
 var DOM = function () {
     return {
         main: document.getElementById("main"),
