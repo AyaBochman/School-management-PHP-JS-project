@@ -204,11 +204,15 @@ function fillForm(result, param) {
             break;
         
         case "admins":
+        
             aFORM.adminId.value = result[0].id;
             aFORM.adminName.value = result[0].name;
             aFORM.adminPhone.value = result[0].phone;
             aFORM.adminEmail.value = result[0].email;
             aFORM.adminRole.value = result[0].role;
+            if(userJob == "manager" && userId == result[0].id){
+                aFORM.adminRole.setAttribute("disabled","disabled");
+            }
             aFORM.imageP.src = result[0].image;
     }
     
