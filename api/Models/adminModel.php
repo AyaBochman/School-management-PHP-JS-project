@@ -91,6 +91,17 @@ if($data[0]->role == "owner" && $_SESSION['role'] != "owner"){
         SET name = '$name', role = '$role', phone = '$phone', email = '$email' 
         where id = '$id' ";
       }
+    }
+    else if($_SESSION['role'] == "owner"){
+      $q = "UPDATE admins
+      SET name = '$name', role = '$role', phone = '$phone', email = '$email' 
+      where id = '$id' ";
+    }
+    // }else{
+    //   $q = "UPDATE admins
+    //   SET name = '$name', role = '$role', phone = '$phone', email = '$email' 
+    //   where id = '$id' ";
+    // }
       
     $data = $this->dbc->Prepare($q);
     $data->execute();
@@ -98,22 +109,12 @@ if($data[0]->role == "owner" && $_SESSION['role'] != "owner"){
     return $id;
     }
 
-    // if($_SESSION['role'] == "manager" && $id == $_SESSION['currentUser']->id){
-     
-  
-    //     $q = "UPDATE admins SET name = '$name', phone = '$phone', email = '$email' 
-    //     where id = '$id' ";
-    //   }else{
-    //     $q = "UPDATE admins
-    //     SET name = '$name', role = '$role', phone = '$phone', email = '$email' 
-    //     where id = '$id' ";
-    //   }
-    
+   
     
    
   }
   
-}
+
 
 
 
