@@ -75,18 +75,6 @@ public function getData($table){
     return $data;
   }
 
-  // public function getNames($table,$id){
-  //   if($table == "students"){
-  //     $data = $this->dbc->Select("SELECT name FROM courses 
-  //     join student_course on student_course.courseId = courses.id where student_course.studentId = ".$id );
-  //   }
-  //   if($table == "courses"){
-  //     $data = $this->dbc->Select("SELECT students.name FROM student_course 
-  //     join students on studentId = students.id where courseId = ".$id);
-  //   }
-    
-  //   return $data;
-  // }
 
   public function courseNames($id){
     $data = $this->dbc->Select("SELECT * FROM courses 

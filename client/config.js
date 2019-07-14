@@ -6,7 +6,7 @@ function init(){
 }
 init();
 
-
+//GLOBALS
 var userJob;
 var userId;
 

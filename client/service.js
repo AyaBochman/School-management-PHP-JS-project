@@ -1,9 +1,4 @@
-// checkLogin();
 
-// getData();
-// function init(){
-//     console.log("refresh");
-// }
 getData();
 
 function getData() {
@@ -156,13 +151,13 @@ function editCurrent() {
     var table = that.getAttribute("table");
     loadForm(table);
  
-    $.ajax({
+    return $.ajax({
         url: "http://localhost/school/api/index.php?controller=home&action=get_current&table="+ table + "&id=" + id,
         method: "GET",
         data: { id: id, table: table },
         success: function (res) {
-        
             fillForm(JSON.parse(res), table);
+            
             
         },
         error: function (res) {
@@ -314,6 +309,7 @@ function saveAdmin() {
             success: function (res) {
                 clean();
                 getAdmin(res);
+                checkLogin();
                 getAdmins();
             }
         });

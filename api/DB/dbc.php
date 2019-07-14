@@ -16,8 +16,7 @@ class DatabaseConnection{
         $this->connection = new mysqli($this->dbServer, $this->userName, $this->password, $this->dbName);
 
         if($this->connection->connect_errno){
-            //the db connection has exception
-            //connect_errno = number that represents the issue
+            
         }
         else{
             $this->isConnected =true;

@@ -97,11 +97,7 @@ if($data[0]->role == "owner" && $_SESSION['role'] != "owner"){
       SET name = '$name', role = '$role', phone = '$phone', email = '$email' 
       where id = '$id' ";
     }
-    // }else{
-    //   $q = "UPDATE admins
-    //   SET name = '$name', role = '$role', phone = '$phone', email = '$email' 
-    //   where id = '$id' ";
-    // }
+  
       
     $data = $this->dbc->Prepare($q);
     $data->execute();
@@ -114,10 +110,6 @@ if($data[0]->role == "owner" && $_SESSION['role'] != "owner"){
    
   }
   
-
-
-
-
 
     
 }
